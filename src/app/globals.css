@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #08090a;
+    --background-elevated: #0f1115;
+    --background-surface: #14171d;
+    --foreground: #ededef;
+    --foreground-muted: #8f94a0;
+    --border: rgba(255, 255, 255, 0.08);
+    --accent: #ff461e;
+    --accent-hover: #ff5e3a;
+  }
+
+  * {
+    border-color: var(--border);
+    box-sizing: border-box;
+  }
+
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    background-color: var(--background);
+    color: var(--foreground);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: #ff461e;
+    color: #ffffff;
+  }
+
+  /* Accessible visible focus styles */
+  :focus-visible {
+    outline: 2px solid #ff461e;
+    outline-offset: 2px;
+  }
+}
+
+/* Shared motion language: content is present in the DOM immediately and only
+   receives a visual entrance when motion is available. */
+.motion-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.motion-reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition {
+  opacity: 0;
+  transform: translateY(8px);
+  filter: blur(2px);
+  transition: opacity 420ms ease, transform 420ms cubic-bezier(0.16, 1, 0.3, 1), filter 420ms ease;
+}
+
+.page-transition.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* ── SVG Animations ── */
+@keyframes pulse-ring {
+  0% {
+    r: 5;
+    opacity: 0.7;
+  }
+  100% {
+    r: 14;
+    opacity: 0;
+  }
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Keep marquee readable but static */
+  .animate-marquee {
+    animation: none !important;
+  }
+
+  .motion-reveal,
+  .page-transition {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+/* ── Utilities ── */
+.bg-grid-subtle {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
+
+.bg-radial-gradient {
+  background: radial-gradient(
+    circle at 50% 0%,
+    rgba(255, 70, 30, 0.08) 0%,
+    transparent 70%
+  );
+}
