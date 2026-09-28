@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    /* Global layers: header 20, progress 30, mobile overlay 40, skip link 50. */
     --background: #08090a;
     --background-elevated: #0f1115;
     --background-surface: #14171d;
@@ -45,6 +46,11 @@
     outline: 2px solid #ff461e;
     outline-offset: 2px;
   }
+}
+
+.mobile-navigation-panel {
+  height: 100vh;
+  height: 100dvh;
 }
 
 /* Shared motion language: content is present in the DOM immediately and only

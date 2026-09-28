@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils/cn";
@@ -8,6 +8,7 @@ import { siteConfig } from "@/lib/constants/site";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { MobileMenu } from "./MobileMenu";
+import { getActiveNavigationHref } from "@/lib/utils/navigation";
 import { ChevronDown, ArrowUpRight } from "lucide-react";
 
 export function Navbar() {
@@ -15,6 +16,9 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const pathname = usePathname();
+  const activeNavigationHref = getActiveNavigationHref(pathname);
+  const closeMobileMenu = useCallback(() => setMobileMenuOpen(false), []);
+  const mobileMenuTriggerRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,7 +44,7 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-20 transition-all duration-300",
         scrolled
           ? "bg-background/85 backdrop-blur-md border-b border-border py-4 shadow-sm"
           : "bg-transparent border-b border-transparent py-6"
@@ -73,12 +77,13 @@ export function Navbar() {
           {/* Desktop Navigation Links */}
           <ul className="hidden md:flex items-center gap-8 text-sm font-medium">
             {siteConfig.navLinks.map((item) => {
-              const isActive =
-                item.href === "/"
-                  ? pathname === "/"
-                  : pathname.startsWith(item.href);
+              const isActive = activeNavigationHref === item.href;
+              const isServicesRoute =
+                pathname === item.href || pathname.startsWith(`${item.href}/`);
 
               if (item.subItems) {
+                const isDropdownExpanded = servicesDropdownOpen || isServicesRoute;
+
                 return (
                   <li
                     key={item.name}
@@ -94,13 +99,14 @@ export function Navbar() {
                           ? "text-foreground font-semibold"
                           : "text-foreground-muted hover:text-foreground"
                       )}
-                      aria-expanded={servicesDropdownOpen}
+                      aria-expanded={isDropdownExpanded}
+                      aria-current={pathname === item.href ? "page" : isActive ? "location" : undefined}
                     >
                       <span>{item.name}</span>
                       <ChevronDown
                         className={cn(
                           "w-3.5 h-3.5 transition-transform duration-200 text-foreground-subtle",
-                          servicesDropdownOpen && "rotate-180 text-foreground"
+                          isDropdownExpanded && "rotate-180 text-foreground"
                         )}
                       />
                     </Link>
@@ -109,9 +115,9 @@ export function Navbar() {
                     <div
                       className={cn(
                         "absolute left-0 top-full pt-2 w-80 transition-all duration-200 pointer-events-none",
-                        servicesDropdownOpen &&
+                        isDropdownExpanded &&
                           "opacity-100 translate-y-0 pointer-events-auto",
-                        !servicesDropdownOpen &&
+                        !isDropdownExpanded &&
                           "opacity-0 -translate-y-2 pointer-events-none"
                       )}
                     >
@@ -150,6 +156,7 @@ export function Navbar() {
                         ? "text-foreground font-semibold"
                         : "text-foreground-muted hover:text-foreground"
                     )}
+                    aria-current={pathname === item.href ? "page" : isActive ? "location" : undefined}
                   >
                     {item.name}
                     <span
@@ -180,8 +187,9 @@ export function Navbar() {
           {/* Mobile Menu Hamburger Button */}
           <button
             type="button"
+            ref={mobileMenuTriggerRef}
             className="md:hidden flex flex-col justify-center items-center w-10 h-10 border border-border rounded-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            onClick={() => setMobileMenuOpen((open) => !open)}
             aria-expanded={mobileMenuOpen}
             aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
           >
@@ -210,7 +218,8 @@ export function Navbar() {
       {/* Accessible Mobile Slide-over Drawer */}
       <MobileMenu
         isOpen={mobileMenuOpen}
-        onClose={() => setMobileMenuOpen(false)}
+        onClose={closeMobileMenu}
+        triggerRef={mobileMenuTriggerRef}
       />
     </header>
   );
