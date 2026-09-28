@@ -27,15 +27,17 @@ export default function SeoServicePage() {
   return (
     <>
       <SeoServiceStructuredData />
-      <Breadcrumbs
-        items={[
-          { label: "Home", href: "/" },
-          { label: "Services", href: "/services" },
-          { label: "SEO" },
-        ]}
-      />
-      {/* 1. SEO Hero with SearchFlow Visual */}
-      <SeoHero />
+      <div className="seo-hero-composition relative isolate overflow-hidden border-b border-border">
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Services", href: "/services" },
+            { label: "SEO" },
+          ]}
+        />
+        {/* 1. SEO Hero with SearchFlow Visual */}
+        <SeoHero />
+      </div>
 
       {/* 2. What SEO Means Today */}
       <WhatSeoMeansToday />

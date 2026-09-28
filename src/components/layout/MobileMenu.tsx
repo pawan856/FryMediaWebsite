@@ -6,7 +6,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/lib/constants/site";
 import { getActiveNavigationHref } from "@/lib/utils/navigation";
-import { Button } from "@/components/ui/Button";
 import { ArrowUpRight, X } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 
@@ -219,15 +218,13 @@ export function MobileMenu({ isOpen, onClose, triggerRef }: MobileMenuProps) {
         </nav>
 
         <div className="shrink-0 space-y-4 border-t border-border pt-6">
-          <Button
+          <Link
             href="/contact"
-            variant="primary"
-            size="lg"
-            className="w-full text-center"
+            className="group relative inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-sm bg-accent px-7 py-3.5 text-center text-base font-semibold text-white shadow-lg shadow-accent/20 transition-all duration-300 hover:bg-accent-hover hover:shadow-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-[0.98]"
             onClick={onClose}
           >
             Initiate Consultation
-          </Button>
+          </Link>
 
           <div className="flex items-center justify-between text-xs text-foreground-muted font-mono pt-2">
             <span>{siteConfig.contactEmail}</span>

@@ -18,34 +18,13 @@ export function SeoHero() {
 
   return (
     <section
-      className="relative w-full min-h-[90vh] flex items-center overflow-hidden pt-28 pb-16 md:pt-36 md:pb-24 border-b border-border"
+      className="relative flex w-full items-center overflow-hidden bg-transparent pb-12 pt-8 md:min-h-[90vh] md:pt-36 md:pb-24"
       aria-labelledby="seo-hero-heading"
     >
-      {/* Radiant ambient glow */}
-      <div
-        className="pointer-events-none absolute inset-0"
-        aria-hidden="true"
-        style={{
-          background:
-            "radial-gradient(ellipse 70% 50% at 50% -5%, rgba(255,70,30,0.08) 0%, transparent 65%)",
-        }}
-      />
-
-      {/* Grid pattern */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-30"
-        aria-hidden="true"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
-        }}
-      />
-
       <Container size="wide" className="relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-8">
           {/* Left Column: Editorial Headline & Actions */}
-          <div className="lg:col-span-6 xl:col-span-5 space-y-8">
+          <div className="space-y-6 sm:space-y-8 lg:col-span-6 xl:col-span-5">
             {/* Eyebrow */}
             <div
               className={cn(
@@ -72,13 +51,21 @@ export function SeoHero() {
             >
               <h1
                 id="seo-hero-heading"
-                className="text-display-2xl font-bold text-foreground leading-none tracking-tighter"
+                className="text-[clamp(2.5rem,10vw,3.75rem)] font-bold leading-[1.02] tracking-tighter text-foreground sm:text-display-2xl"
               >
-                Turn search intent
-                <br />
-                into <span className="text-accent">sustainable</span>
-                <br />
-                growth.
+                <span className="sm:hidden">
+                  <span className="block">Turn search</span>
+                  <span className="block">intent into</span>
+                  <span className="block text-accent">sustainable</span>
+                  <span className="block text-foreground">growth.</span>
+                </span>
+                <span className="hidden sm:inline">
+                  Turn search intent
+                  <br />
+                  into <span className="text-accent">sustainable</span>
+                  <br />
+                  growth.
+                </span>
               </h1>
             </div>
 
