@@ -63,7 +63,7 @@ function HeroVisual() {
         className="absolute inset-0"
         style={{
           backgroundImage:
-            "linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)",
+            "linear-gradient(to right, rgba(24,60,46,0.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(24,60,46,0.045) 1px, transparent 1px)",
           backgroundSize: "32px 32px",
         }}
       />
@@ -72,7 +72,7 @@ function HeroVisual() {
       <div
         className="absolute inset-0 transition-all duration-700 ease-out"
         style={{
-          background: `radial-gradient(ellipse 55% 45% at ${50 + parallaxX * 0.5}% ${50 + parallaxY * 0.5}%, rgba(255,70,30,0.10) 0%, transparent 70%)`,
+          background: `radial-gradient(ellipse 55% 45% at ${50 + parallaxX * 0.5}% ${50 + parallaxY * 0.5}%, rgba(112,157,119,0.18) 0%, transparent 70%)`,
         }}
       />
 
@@ -93,7 +93,7 @@ function HeroVisual() {
             y1={nodes[from].cy}
             x2={nodes[to].cx}
             y2={nodes[to].cy}
-            stroke="rgba(255,255,255,0.07)"
+            stroke="rgba(24,60,46,0.12)"
             strokeWidth="0.4"
           />
         ))}
@@ -106,7 +106,7 @@ function HeroVisual() {
             y1={nodes[0].cy}
             x2={nodes[edges[i][1]].cx}
             y2={nodes[edges[i][1]].cy}
-            stroke="rgba(255,70,30,0.25)"
+            stroke="rgba(112,157,119,0.5)"
             strokeWidth="0.5"
           />
         ))}
@@ -122,7 +122,7 @@ function HeroVisual() {
                   cy={node.cy}
                   r="8"
                   fill="none"
-                  stroke="rgba(255,70,30,0.12)"
+                  stroke="rgba(112,157,119,0.28)"
                   strokeWidth="0.5"
                   style={{
                     animation: "pulse-ring 3s ease-out infinite",
@@ -133,7 +133,7 @@ function HeroVisual() {
                   cy={node.cy}
                   r="5.5"
                   fill="none"
-                  stroke="rgba(255,70,30,0.18)"
+                  stroke="rgba(112,157,119,0.38)"
                   strokeWidth="0.5"
                 />
               </>
@@ -143,7 +143,7 @@ function HeroVisual() {
               cx={node.cx}
               cy={node.cy}
               r={node.r}
-              fill={i === 0 ? "#FF461E" : i < 3 ? "rgba(255,70,30,0.6)" : "rgba(255,255,255,0.25)"}
+              fill={i === 0 ? "#709D77" : i < 3 ? "rgba(112,157,119,0.75)" : "rgba(24,60,46,0.28)"}
               style={{
                 animation: `pulse-slow ${2 + (i * 0.3)}s ease-in-out infinite`,
                 animationDelay: node.delay,
@@ -153,7 +153,7 @@ function HeroVisual() {
         ))}
 
         {/* Moving signal dot on primary path */}
-        <circle r="1" fill="#FF461E" opacity="0.9">
+        <circle r="1" fill="#709D77" opacity="0.9">
           <animateMotion
             dur="4s"
             repeatCount="indefinite"
@@ -162,7 +162,7 @@ function HeroVisual() {
         </circle>
 
         {/* Second moving signal dot */}
-        <circle r="0.8" fill="rgba(255,70,30,0.7)" opacity="0.7">
+        <circle r="0.8" fill="rgba(112,157,119,0.8)" opacity="0.7">
           <animateMotion
             dur="6s"
             repeatCount="indefinite"
@@ -224,7 +224,7 @@ export function Hero() {
         aria-hidden="true"
         style={{
           background:
-            "radial-gradient(ellipse 70% 50% at 50% -10%, rgba(255,70,30,0.07) 0%, transparent 70%)",
+            "radial-gradient(ellipse 70% 50% at 50% -10%, rgba(112,157,119,0.15) 0%, transparent 70%)",
         }}
       />
 
@@ -234,7 +234,7 @@ export function Hero() {
         aria-hidden="true"
         style={{
           backgroundImage:
-            "linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px)",
+            "linear-gradient(to right, rgba(24,60,46,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(24,60,46,0.04) 1px, transparent 1px)",
           backgroundSize: "48px 48px",
         }}
       />
@@ -254,7 +254,7 @@ export function Hero() {
               <div className="inline-flex items-center gap-2">
                 <span className="block w-6 h-px bg-accent" />
                 <span className="text-xs font-mono tracking-widest uppercase text-foreground-muted">
-                  FyrnMedia · Digital Growth · SEO · AI-era Search
+                  Fyrn Media · AI for Everyday Life
                 </span>
               </div>
             </div>
@@ -271,13 +271,11 @@ export function Hero() {
                 id="hero-heading"
                 className="text-display-2xl font-bold text-foreground leading-none tracking-tighter"
               >
-                Built for
+                Making everyday
                 <br />
-                <span className="text-accent">visibility.</span>
+                life better
                 <br />
-                Designed for
-                <br />
-                growth.
+                <span className="text-accent">with AI.</span>
               </h1>
             </div>
 
@@ -290,10 +288,10 @@ export function Hero() {
               style={{ transitionDelay: "240ms" }}
             >
               <p className="text-base md:text-lg text-foreground-muted leading-relaxed max-w-md">
-                FyrnMedia helps brands build lasting digital presence — combining
-                technical SEO, strategic content, and high-performance web
-                systems to improve discoverability and turn relevant attention
-                into qualified growth.
+                We make AI useful in the real world. Through thoughtful digital
+                strategy, search, and web experiences, we help ambitious brands
+                connect technology with the people and everyday moments that
+                matter.
               </p>
             </div>
 
@@ -380,15 +378,15 @@ export function Hero() {
                 <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent" />
               </span>
               <span className="text-[10px] font-mono text-foreground-muted tracking-widest uppercase">
-                Search Intelligence Active
+                  Human-first AI
               </span>
             </div>
 
             {/* Capability marker — bottom right of visual */}
             <div className="absolute bottom-4 right-4 z-10 bg-background-elevated/80 backdrop-blur-sm border border-border px-4 py-3 rounded-sm text-right">
-              <div className="text-lg font-bold font-mono text-foreground tracking-tight">SEARCH → GROWTH</div>
+              <div className="text-lg font-bold font-mono text-foreground tracking-tight">IDEAS → EVERYDAY</div>
               <div className="text-[10px] font-mono text-foreground-subtle uppercase tracking-widest">
-                Strategy · Content · Systems
+                People · Technology · Possibility
               </div>
             </div>
           </div>

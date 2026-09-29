@@ -26,7 +26,7 @@ export function ServiceHero() {
         aria-hidden="true"
         style={{
           background:
-            "radial-gradient(ellipse 65% 50% at 50% -5%, rgba(255,70,30,0.07) 0%, transparent 65%)",
+            "radial-gradient(ellipse 65% 50% at 50% -5%, rgba(112,157,119,0.15) 0%, transparent 65%)",
         }}
       />
 
@@ -36,7 +36,7 @@ export function ServiceHero() {
         aria-hidden="true"
         style={{
           backgroundImage:
-            "linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px)",
+            "linear-gradient(to right, rgba(24,60,46,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(24,60,46,0.04) 1px, transparent 1px)",
           backgroundSize: "48px 48px",
         }}
       />

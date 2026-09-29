@@ -5,14 +5,16 @@
 @layer base {
   :root {
     /* Global layers: header 20, progress 30, mobile overlay 40, skip link 50. */
-    --background: #08090a;
-    --background-elevated: #0f1115;
-    --background-surface: #14171d;
-    --foreground: #ededef;
-    --foreground-muted: #8f94a0;
-    --border: rgba(255, 255, 255, 0.08);
-    --accent: #ff461e;
-    --accent-hover: #ff5e3a;
+    --background: #f7f8f3;
+    --background-elevated: #eef3eb;
+    --background-surface: #e3ece2;
+    --foreground: #183c2e;
+    --foreground-muted: #52685a;
+    --foreground-subtle: #718477;
+    --foreground-dim: #aab7aa;
+    --border: rgba(24, 60, 46, 0.14);
+    --accent: #28583e;
+    --accent-hover: #36714f;
   }
 
   * {
@@ -21,7 +23,7 @@
   }
 
   html {
-    color-scheme: dark;
+    color-scheme: light;
     scroll-behavior: smooth;
     background-color: var(--background);
     color: var(--foreground);
@@ -37,13 +39,13 @@
   }
 
   ::selection {
-    background: #ff461e;
+    background: #28583e;
     color: #ffffff;
   }
 
   /* Accessible visible focus styles */
   :focus-visible {
-    outline: 2px solid #ff461e;
+    outline: 2px solid #28583e;
     outline-offset: 2px;
   }
 }
@@ -57,11 +59,11 @@
   background-color: var(--background);
   background-image:
     linear-gradient(to bottom, transparent 76%, var(--background) 100%),
-    radial-gradient(ellipse 90% 42% at 84% 20%, rgba(255, 70, 30, 0.075), transparent 72%),
-    radial-gradient(ellipse 100% 56% at 8% 46%, rgba(93, 101, 116, 0.09), transparent 74%),
-    linear-gradient(132deg, rgba(255, 255, 255, 0.018), transparent 42%),
-    linear-gradient(to right, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+    radial-gradient(ellipse 90% 42% at 84% 20%, rgba(112, 157, 119, 0.14), transparent 72%),
+    radial-gradient(ellipse 100% 56% at 8% 46%, rgba(50, 91, 64, 0.07), transparent 74%),
+    linear-gradient(132deg, rgba(255, 255, 255, 0.45), transparent 42%),
+    linear-gradient(to right, rgba(24, 60, 46, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(24, 60, 46, 0.035) 1px, transparent 1px);
   background-size: auto, auto, auto, auto, 48px 48px, 48px 48px;
 }
 
@@ -69,11 +71,11 @@
   .seo-hero-composition {
     background-image:
       linear-gradient(to bottom, transparent 78%, var(--background) 100%),
-      radial-gradient(ellipse 120% 30% at 78% 13%, rgba(255, 70, 30, 0.09), transparent 74%),
-      radial-gradient(ellipse 110% 42% at 12% 40%, rgba(93, 101, 116, 0.075), transparent 76%),
-      linear-gradient(132deg, rgba(255, 255, 255, 0.016), transparent 48%),
-      linear-gradient(to right, rgba(255, 255, 255, 0.016) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.016) 1px, transparent 1px);
+      radial-gradient(ellipse 120% 30% at 78% 13%, rgba(112, 157, 119, 0.16), transparent 74%),
+      radial-gradient(ellipse 110% 42% at 12% 40%, rgba(50, 91, 64, 0.06), transparent 76%),
+      linear-gradient(132deg, rgba(255, 255, 255, 0.4), transparent 48%),
+      linear-gradient(to right, rgba(24, 60, 46, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(24, 60, 46, 0.03) 1px, transparent 1px);
     background-size: auto, auto, auto, auto, 36px 36px, 36px 36px;
     background-position: center, center top, left 20%, center, center, center;
   }
@@ -146,14 +148,14 @@
 .bg-grid-subtle {
   background-size: 40px 40px;
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    linear-gradient(to right, rgba(24, 60, 46, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(24, 60, 46, 0.035) 1px, transparent 1px);
 }
 
 .bg-radial-gradient {
   background: radial-gradient(
     circle at 50% 0%,
-    rgba(255, 70, 30, 0.08) 0%,
+    rgba(112, 157, 119, 0.16) 0%,
     transparent 70%
   );
 }

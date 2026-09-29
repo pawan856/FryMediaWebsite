@@ -11,28 +11,28 @@ const config: Config = {
     extend: {
       colors: {
         background: {
-          DEFAULT: "#08090A",
-          elevated: "#0E1014",
-          surface: "#14171D",
-          highlight: "#1C2028",
+          DEFAULT: "#F7F8F3",
+          elevated: "#EEF3EB",
+          surface: "#E3ECE2",
+          highlight: "#D5E4D6",
         },
         foreground: {
-          DEFAULT: "#EDEDEF",
-          muted: "#8F94A0",
-          subtle: "#5A5F6D",
-          dim: "#3A3D46",
+          DEFAULT: "#183C2E",
+          muted: "#52685A",
+          subtle: "#718477",
+          dim: "#AAB7AA",
         },
         border: {
-          DEFAULT: "rgba(255, 255, 255, 0.08)",
-          hover: "rgba(255, 255, 255, 0.16)",
-          active: "rgba(255, 255, 255, 0.28)",
+          DEFAULT: "rgba(24, 60, 46, 0.14)",
+          hover: "rgba(24, 60, 46, 0.24)",
+          active: "rgba(24, 60, 46, 0.36)",
         },
         accent: {
-          DEFAULT: "#FF461E",
-          hover: "#FF5E3A",
-          glow: "rgba(255, 70, 30, 0.25)",
-          subtle: "rgba(255, 70, 30, 0.08)",
-          border: "rgba(255, 70, 30, 0.35)",
+          DEFAULT: "#28583E",
+          hover: "#36714F",
+          glow: "rgba(40, 88, 62, 0.22)",
+          subtle: "rgba(112, 157, 119, 0.14)",
+          border: "rgba(40, 88, 62, 0.3)",
         },
       },
       fontFamily: {
@@ -73,16 +73,16 @@ const config: Config = {
         widest: "0.12em",
       },
       boxShadow: {
-        subtle: "0 1px 2px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05)",
-        card: "0 4px 20px -2px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08)",
-        "card-hover": "0 8px 32px -4px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.16)",
-        accent: "0 0 30px -5px rgba(255, 70, 30, 0.35)",
+        subtle: "0 1px 2px rgba(24, 60, 46, 0.08), 0 0 0 1px rgba(24, 60, 46, 0.05)",
+        card: "0 4px 20px -2px rgba(24, 60, 46, 0.12), 0 0 0 1px rgba(24, 60, 46, 0.08)",
+        "card-hover": "0 8px 32px -4px rgba(24, 60, 46, 0.18), 0 0 0 1px rgba(24, 60, 46, 0.16)",
+        accent: "0 0 30px -5px rgba(40, 88, 62, 0.28)",
       },
       backgroundImage: {
         "grid-pattern":
-          "linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px)",
+          "linear-gradient(to right, rgba(24, 60, 46, 0.035) 1px, transparent 1px), linear-gradient(to bottom, rgba(24, 60, 46, 0.035) 1px, transparent 1px)",
         "subtle-glow":
-          "radial-gradient(ellipse 60% 40% at 50% -20%, rgba(255, 70, 30, 0.12), transparent 70%)",
+          "radial-gradient(ellipse 60% 40% at 50% -20%, rgba(112, 157, 119, 0.18), transparent 70%)",
       },
       keyframes: {
         "fade-up": {

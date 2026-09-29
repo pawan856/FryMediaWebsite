@@ -53,7 +53,7 @@ export function Vision() {
         aria-hidden="true"
         style={{
           background:
-            "radial-gradient(ellipse 70% 50% at 50% 20%, rgba(255,70,30,0.05) 0%, transparent 65%)",
+            "radial-gradient(ellipse 70% 50% at 50% 20%, rgba(112,157,119,0.13) 0%, transparent 65%)",
         }}
       />
 
@@ -116,7 +116,7 @@ export function Vision() {
                 className="absolute left-[27px] top-6 bottom-6 w-px transition-all duration-1000"
                 style={{
                   background: inView
-                    ? "linear-gradient(to bottom, rgba(255,70,30,0.6), rgba(255,255,255,0.06) 80%, transparent)"
+                    ? "linear-gradient(to bottom, rgba(112,157,119,0.7), rgba(24,60,46,0.08) 80%, transparent)"
                     : "transparent",
                   transitionDelay: "200ms",
                 }}

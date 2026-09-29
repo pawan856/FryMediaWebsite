@@ -41,7 +41,7 @@ export function ServicesVisual() {
         className="absolute inset-0"
         style={{
           backgroundImage:
-            "linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px)",
+            "linear-gradient(to right, rgba(24,60,46,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(24,60,46,0.04) 1px, transparent 1px)",
           backgroundSize: "32px 32px",
         }}
       />
@@ -50,7 +50,7 @@ export function ServicesVisual() {
       <div
         className="absolute inset-0 transition-all duration-700 ease-out"
         style={{
-          background: `radial-gradient(ellipse 55% 50% at ${50 + dx * 0.4}% ${50 + dy * 0.4}%, rgba(255,70,30,0.12) 0%, transparent 70%)`,
+          background: `radial-gradient(ellipse 55% 50% at ${50 + dx * 0.4}% ${50 + dy * 0.4}%, rgba(112,157,119,0.2) 0%, transparent 70%)`,
         }}
       />
 
@@ -62,14 +62,14 @@ export function ServicesVisual() {
         preserveAspectRatio="xMidYMid meet"
       >
         {/* Core Coordinate Axes */}
-        <line x1="20" y1="120" x2="145" y2="120" stroke="rgba(255,255,255,0.15)" strokeWidth="0.75" />
-        <line x1="20" y1="20" x2="20" y2="120" stroke="rgba(255,255,255,0.15)" strokeWidth="0.75" />
+        <line x1="20" y1="120" x2="145" y2="120" stroke="rgba(24,60,46,0.18)" strokeWidth="0.75" />
+        <line x1="20" y1="20" x2="20" y2="120" stroke="rgba(24,60,46,0.18)" strokeWidth="0.75" />
 
         {/* Growth Curves (Organic Search Compounding Curve) */}
         <path
           d="M 20 115 Q 60 110, 85 85 T 140 25"
           fill="none"
-          stroke="#FF461E"
+          stroke="#709D77"
           strokeWidth="1.75"
           strokeDasharray="200"
           strokeDashoffset={mounted ? "0" : "200"}
@@ -79,7 +79,7 @@ export function ServicesVisual() {
         <path
           d="M 20 115 Q 70 105, 140 95"
           fill="none"
-          stroke="rgba(255,255,255,0.1)"
+          stroke="rgba(24,60,46,0.12)"
           strokeWidth="1"
           strokeDasharray="4 4"
         />
@@ -94,8 +94,8 @@ export function ServicesVisual() {
 
         <defs>
           <linearGradient id="curveGlow" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#FF461E" stopOpacity="0.4" />
-            <stop offset="100%" stopColor="#FF461E" stopOpacity="0.0" />
+            <stop offset="0%" stopColor="#709D77" stopOpacity="0.45" />
+            <stop offset="100%" stopColor="#709D77" stopOpacity="0.0" />
           </linearGradient>
         </defs>
 
@@ -112,7 +112,7 @@ export function ServicesVisual() {
               cx={node.cx}
               cy={node.cy}
               r={node.highlight ? 3.5 : 2.2}
-              fill={node.highlight ? "#FF461E" : "#EDEDEF"}
+              fill={node.highlight ? "#709D77" : "#183C2E"}
               opacity={mounted ? 1 : 0}
               style={{
                 transition: `opacity 0.6s ease ${node.delay}`,
@@ -125,7 +125,7 @@ export function ServicesVisual() {
                 cy={node.cy}
                 r="7"
                 fill="none"
-                stroke="rgba(255,70,30,0.4)"
+                stroke="rgba(112,157,119,0.6)"
                 strokeWidth="0.8"
               />
             )}
@@ -134,7 +134,7 @@ export function ServicesVisual() {
               y1={node.cy}
               x2={node.cx}
               y2="120"
-              stroke="rgba(255,255,255,0.06)"
+              stroke="rgba(24,60,46,0.08)"
               strokeWidth="0.5"
               strokeDasharray="2 2"
             />
@@ -143,7 +143,7 @@ export function ServicesVisual() {
 
         {/* Traveling Signal Pulse along the curve */}
         {mounted && (
-          <circle r="2" fill="#FF461E">
+          <circle r="2" fill="#709D77">
             <animateMotion
               dur="4.5s"
               repeatCount="indefinite"

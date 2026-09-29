@@ -22,7 +22,7 @@ export function ServicesCTA() {
         aria-hidden="true"
         style={{
           background:
-            "radial-gradient(ellipse 75% 55% at 50% 50%, rgba(255,70,30,0.06) 0%, transparent 70%)",
+            "radial-gradient(ellipse 75% 55% at 50% 50%, rgba(112,157,119,0.14) 0%, transparent 70%)",
         }}
       />
 
@@ -31,7 +31,7 @@ export function ServicesCTA() {
         aria-hidden="true"
         style={{
           backgroundImage:
-            "linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px)",
+            "linear-gradient(to right, rgba(24,60,46,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(24,60,46,0.04) 1px, transparent 1px)",
           backgroundSize: "48px 48px",
         }}
       />

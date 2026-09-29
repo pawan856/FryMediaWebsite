@@ -3,16 +3,17 @@
 import React from "react";
 
 const ITEMS = [
+  "AI for Everyday Life",
+  "Human-Centered Technology",
+  "Practical AI",
+  "Digital Experiences",
+  "Smarter Strategy",
   "SEO Engineering",
-  "Digital Strategy",
   "Content Architecture",
   "Technical Performance",
   "Organic Growth",
-  "Search Intelligence",
-  "Web Systems",
-  "Analytics & Data",
-  "Brand Visibility",
-  "AI-Era Search",
+  "Search Visibility",
+  "Web Experiences",
 ];
 
 export function PositioningStrip() {

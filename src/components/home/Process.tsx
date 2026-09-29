@@ -83,7 +83,7 @@ export function Process() {
             className="absolute left-[calc(4rem-0.5px)] top-4 bottom-4 w-px hidden lg:block transition-all duration-1000"
             style={{
               background: inView
-                ? "linear-gradient(to bottom, rgba(255,70,30,0.5), rgba(255,255,255,0.06))"
+                ? "linear-gradient(to bottom, rgba(112,157,119,0.65), rgba(24,60,46,0.08))"
                 : "transparent",
             }}
             aria-hidden="true"

@@ -39,7 +39,7 @@ function FMonogram() {
         className="absolute inset-0"
         style={{
           backgroundImage:
-            "linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px)",
+            "linear-gradient(to right, rgba(24,60,46,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(24,60,46,0.04) 1px, transparent 1px)",
           backgroundSize: "28px 28px",
         }}
       />
@@ -48,7 +48,7 @@ function FMonogram() {
       <div
         className="absolute inset-0 transition-all duration-700 ease-out"
         style={{
-          background: `radial-gradient(ellipse 50% 50% at ${50 + dx * 0.5}% ${50 + dy * 0.5}%, rgba(255,70,30,0.10) 0%, transparent 70%)`,
+          background: `radial-gradient(ellipse 50% 50% at ${50 + dx * 0.5}% ${50 + dy * 0.5}%, rgba(112,157,119,0.18) 0%, transparent 70%)`,
         }}
       />
 
@@ -63,41 +63,41 @@ function FMonogram() {
         <rect
           x="28" y="20" width="64" height="100"
           fill="none"
-          stroke="rgba(255,255,255,0.05)"
+          stroke="rgba(24,60,46,0.08)"
           strokeWidth="0.5"
         />
 
         {/* Structural skeleton lines of F */}
         {/* Vertical bar of the F */}
-        <line x1="28" y1="20" x2="28" y2="120" stroke="rgba(255,255,255,0.12)" strokeWidth="1" />
-        <line x1="44" y1="20" x2="44" y2="120" stroke="rgba(255,255,255,0.06)" strokeWidth="0.5" />
+        <line x1="28" y1="20" x2="28" y2="120" stroke="rgba(24,60,46,0.16)" strokeWidth="1" />
+        <line x1="44" y1="20" x2="44" y2="120" stroke="rgba(24,60,46,0.08)" strokeWidth="0.5" />
 
         {/* Top horizontal bar */}
-        <line x1="28" y1="20" x2="92" y2="20" stroke="rgba(255,255,255,0.12)" strokeWidth="1" />
-        <line x1="28" y1="36" x2="92" y2="36" stroke="rgba(255,255,255,0.06)" strokeWidth="0.5" />
+        <line x1="28" y1="20" x2="92" y2="20" stroke="rgba(24,60,46,0.16)" strokeWidth="1" />
+        <line x1="28" y1="36" x2="92" y2="36" stroke="rgba(24,60,46,0.08)" strokeWidth="0.5" />
 
         {/* Middle cross bar */}
-        <line x1="28" y1="72" x2="72" y2="72" stroke="rgba(255,255,255,0.12)" strokeWidth="1" />
-        <line x1="28" y1="60" x2="72" y2="60" stroke="rgba(255,255,255,0.06)" strokeWidth="0.5" />
+        <line x1="28" y1="72" x2="72" y2="72" stroke="rgba(24,60,46,0.16)" strokeWidth="1" />
+        <line x1="28" y1="60" x2="72" y2="60" stroke="rgba(24,60,46,0.08)" strokeWidth="0.5" />
 
         {/* Accent lines — vermilion, drawn on entrance */}
         <line
           x1="28" y1="20" x2="92" y2="20"
-          stroke="#FF461E" strokeWidth="1.5" opacity="0.8"
+          stroke="#709D77" strokeWidth="1.5" opacity="0.8"
           strokeDasharray="64"
           strokeDashoffset={mounted ? "0" : "64"}
           style={{ transition: "stroke-dashoffset 1.2s cubic-bezier(0.16,1,0.3,1) 0.3s" }}
         />
         <line
           x1="28" y1="20" x2="28" y2="120"
-          stroke="#FF461E" strokeWidth="1.5" opacity="0.8"
+          stroke="#709D77" strokeWidth="1.5" opacity="0.8"
           strokeDasharray="100"
           strokeDashoffset={mounted ? "0" : "100"}
           style={{ transition: "stroke-dashoffset 1.4s cubic-bezier(0.16,1,0.3,1) 0.5s" }}
         />
         <line
           x1="28" y1="72" x2="72" y2="72"
-          stroke="#FF461E" strokeWidth="1.5" opacity="0.8"
+          stroke="#709D77" strokeWidth="1.5" opacity="0.8"
           strokeDasharray="44"
           strokeDashoffset={mounted ? "0" : "44"}
           style={{ transition: "stroke-dashoffset 1.0s cubic-bezier(0.16,1,0.3,1) 0.9s" }}
@@ -121,7 +121,7 @@ function FMonogram() {
             cx={node.cx}
             cy={node.cy}
             r={node.r}
-            fill={node.accent ? "#FF461E" : "rgba(255,255,255,0.3)"}
+            fill={node.accent ? "#709D77" : "rgba(24,60,46,0.3)"}
             opacity={mounted ? 1 : 0}
             style={{
               transition: `opacity 0.5s ease ${node.delay}`,
@@ -132,7 +132,7 @@ function FMonogram() {
 
         {/* Traveling signal dot along the F strokes */}
         {mounted && (
-          <circle r="1.5" fill="#FF461E" opacity="0.9">
+          <circle r="1.5" fill="#709D77" opacity="0.9">
             <animateMotion
               dur="5s"
               repeatCount="indefinite"
@@ -142,12 +142,12 @@ function FMonogram() {
         )}
 
         {/* Corner ticks — engineering feel */}
-        <line x1="24" y1="16" x2="32" y2="16" stroke="rgba(255,70,30,0.3)" strokeWidth="0.8" />
-        <line x1="24" y1="16" x2="24" y2="24" stroke="rgba(255,70,30,0.3)" strokeWidth="0.8" />
-        <line x1="88" y1="16" x2="96" y2="16" stroke="rgba(255,70,30,0.3)" strokeWidth="0.8" />
-        <line x1="96" y1="16" x2="96" y2="24" stroke="rgba(255,70,30,0.3)" strokeWidth="0.8" />
-        <line x1="24" y1="124" x2="32" y2="124" stroke="rgba(255,70,30,0.3)" strokeWidth="0.8" />
-        <line x1="24" y1="116" x2="24" y2="124" stroke="rgba(255,70,30,0.3)" strokeWidth="0.8" />
+        <line x1="24" y1="16" x2="32" y2="16" stroke="rgba(112,157,119,0.45)" strokeWidth="0.8" />
+        <line x1="24" y1="16" x2="24" y2="24" stroke="rgba(112,157,119,0.45)" strokeWidth="0.8" />
+        <line x1="88" y1="16" x2="96" y2="16" stroke="rgba(112,157,119,0.45)" strokeWidth="0.8" />
+        <line x1="96" y1="16" x2="96" y2="24" stroke="rgba(112,157,119,0.45)" strokeWidth="0.8" />
+        <line x1="24" y1="124" x2="32" y2="124" stroke="rgba(112,157,119,0.45)" strokeWidth="0.8" />
+        <line x1="24" y1="116" x2="24" y2="124" stroke="rgba(112,157,119,0.45)" strokeWidth="0.8" />
       </svg>
 
       {/* Floating label overlays */}
@@ -199,7 +199,7 @@ export function AboutHero() {
         aria-hidden="true"
         style={{
           background:
-            "radial-gradient(ellipse 65% 45% at 55% -5%, rgba(255,70,30,0.07) 0%, transparent 65%)",
+            "radial-gradient(ellipse 65% 45% at 55% -5%, rgba(112,157,119,0.15) 0%, transparent 65%)",
         }}
       />
 
@@ -209,7 +209,7 @@ export function AboutHero() {
         aria-hidden="true"
         style={{
           backgroundImage:
-            "linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px)",
+            "linear-gradient(to right, rgba(24,60,46,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(24,60,46,0.04) 1px, transparent 1px)",
           backgroundSize: "48px 48px",
         }}
       />

@@ -104,7 +104,7 @@ export function SeoSpotlight() {
         aria-hidden="true"
         style={{
           background:
-            "radial-gradient(ellipse 60% 60% at 85% 30%, rgba(255,70,30,0.05) 0%, transparent 70%)",
+            "radial-gradient(ellipse 60% 60% at 85% 30%, rgba(112,157,119,0.13) 0%, transparent 70%)",
         }}
       />
 

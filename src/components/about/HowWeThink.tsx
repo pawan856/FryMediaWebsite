@@ -29,7 +29,7 @@ export function HowWeThink() {
         aria-hidden="true"
         style={{
           background:
-            "radial-gradient(ellipse 80% 60% at 100% 40%, rgba(255,70,30,0.04) 0%, transparent 70%)",
+            "radial-gradient(ellipse 80% 60% at 100% 40%, rgba(112,157,119,0.12) 0%, transparent 70%)",
         }}
       />
 

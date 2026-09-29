@@ -21,7 +21,7 @@ export function AiSearchSection() {
         aria-hidden="true"
         style={{
           background:
-            "radial-gradient(ellipse 70% 60% at 85% 50%, rgba(255,70,30,0.06) 0%, transparent 70%)",
+            "radial-gradient(ellipse 70% 60% at 85% 50%, rgba(112,157,119,0.14) 0%, transparent 70%)",
         }}
       />
 

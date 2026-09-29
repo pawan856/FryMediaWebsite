@@ -23,8 +23,8 @@ const geistMono = Geist_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#08090A",
-  colorScheme: "dark",
+  themeColor: "#F7F8F3",
+  colorScheme: "light",
   width: "device-width",
   initialScale: 1,
 };
@@ -37,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang={primaryMarket.locale} dir={primaryMarket.language === "ar" ? "rtl" : "ltr"} className={`${geistSans.variable} ${geistMono.variable} dark scroll-smooth`}>
+    <html lang={primaryMarket.locale} dir={primaryMarket.language === "ar" ? "rtl" : "ltr"} className={`${geistSans.variable} ${geistMono.variable} scroll-smooth`}>
       <body className="bg-background text-foreground antialiased selection:bg-accent selection:text-white flex min-h-screen flex-col font-sans">
         <SiteStructuredData />
         <AttributionTracker />

@@ -46,7 +46,7 @@ export function PointOfView() {
         className="absolute left-0 top-0 bottom-0 w-px"
         style={{
           background: inView
-            ? "linear-gradient(to bottom, transparent, rgba(255,70,30,0.4), transparent)"
+            ? "linear-gradient(to bottom, transparent, rgba(112,157,119,0.55), transparent)"
             : "transparent",
           transition: "background 1.2s ease 0.3s",
         }}

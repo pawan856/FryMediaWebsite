@@ -12,9 +12,9 @@ import { TrustStrip } from "@/components/trust/TrustStrip";
 import { ProblemSolution } from "@/components/trust/ProblemSolution";
 
 export const metadata: Metadata = constructMetadata({
-  title: "FyrnMedia — Digital Growth & SEO",
+  title: "Fyrn Media — AI for Everyday Life",
   description:
-    "FyrnMedia is a premium digital growth studio specialising in technical SEO, organic search engineering, and high-performance web systems. We help ambitious brands build lasting visibility and grow through data-driven strategy.",
+    "Fyrn Media exists to make AI useful in everyday life. We help ambitious brands grow through thoughtful digital strategy, search visibility, and high-performance web experiences.",
   path: "/",
 });
 

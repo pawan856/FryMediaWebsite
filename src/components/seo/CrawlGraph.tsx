@@ -71,7 +71,7 @@ export function CrawlGraph() {
               y1={nodes[e.from].cy}
               x2={nodes[e.to].cx}
               y2={nodes[e.to].cy}
-              stroke="rgba(255,255,255,0.12)"
+              stroke="rgba(24,60,46,0.16)"
               strokeWidth="0.8"
             />
           ))}
@@ -80,14 +80,14 @@ export function CrawlGraph() {
           <path
             d="M 25 70 L 65 35 L 110 25 L 145 15"
             fill="none"
-            stroke="#FF461E"
+            stroke="#709D77"
             strokeWidth="1.2"
             opacity="0.8"
           />
 
           {/* Crawler Spider Simulation Dot */}
           {mounted && (
-            <circle r="2.5" fill="#FF461E">
+            <circle r="2.5" fill="#709D77">
               <animateMotion
                 dur="3.8s"
                 repeatCount="indefinite"
@@ -103,14 +103,14 @@ export function CrawlGraph() {
                 cx={node.cx}
                 cy={node.cy}
                 r={node.role === "root" ? 4.5 : node.role === "pillar" ? 4 : 3}
-                fill={node.role === "pillar" ? "#FF461E" : node.role === "root" ? "#EDEDEF" : "#1F222A"}
-                stroke={node.role === "pillar" ? "#FF461E" : "rgba(255,255,255,0.4)"}
+                fill={node.role === "pillar" ? "#709D77" : node.role === "root" ? "#183C2E" : "#D5E4D6"}
+                stroke={node.role === "pillar" ? "#709D77" : "rgba(24,60,46,0.4)"}
                 strokeWidth="1"
               />
               <text
                 x={node.cx}
                 y={node.cy + 10}
-                fill="rgba(255,255,255,0.6)"
+                fill="rgba(24,60,46,0.6)"
                 fontSize="6"
                 fontFamily="monospace"
                 textAnchor="middle"

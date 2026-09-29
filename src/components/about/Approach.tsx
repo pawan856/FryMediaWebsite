@@ -98,7 +98,7 @@ export function Approach() {
                       className="absolute right-0 top-[28px] w-full h-px z-0 transition-all duration-1000"
                       style={{
                         background: inView
-                          ? "linear-gradient(to right, rgba(255,70,30,0.5), rgba(255,255,255,0.08))"
+                          ? "linear-gradient(to right, rgba(112,157,119,0.65), rgba(24,60,46,0.08))"
                           : "transparent",
                         transitionDelay: `${i * 150 + 300}ms`,
                       }}
