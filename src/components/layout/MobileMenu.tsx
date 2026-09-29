@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/lib/constants/site";
+import { FyrnLogo } from "@/components/brand/FyrnLogo";
 import { getActiveNavigationHref } from "@/lib/utils/navigation";
 import { ArrowUpRight, X } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
@@ -156,12 +157,10 @@ export function MobileMenu({ isOpen, onClose, triggerRef }: MobileMenuProps) {
           <Link
             href="/"
             onClick={onClose}
-            className="flex items-center gap-2"
+            className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            aria-label="Fyrn Media home"
           >
-            <span className="w-2.5 h-2.5 bg-accent rotate-45 transform" />
-            <span className="font-bold text-lg tracking-tight text-foreground font-sans">
-              FYRN<span className="font-light text-foreground-muted">MEDIA</span>
-            </span>
+            <FyrnLogo />
           </Link>
           <button
             type="button"

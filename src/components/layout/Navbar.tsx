@@ -9,6 +9,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { MobileMenu } from "./MobileMenu";
 import { getActiveNavigationHref } from "@/lib/utils/navigation";
+import { FyrnLogo } from "@/components/brand/FyrnLogo";
 import { ChevronDown, ArrowUpRight } from "lucide-react";
 
 export function Navbar() {
@@ -58,20 +59,10 @@ export function Navbar() {
           {/* Logo / Wordmark */}
           <Link
             href="/"
-            className="group flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
-            aria-label="FyrnMedia Home"
+            className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            aria-label="Fyrn Media home"
           >
-            <span className="flex items-center justify-center w-7 h-7 bg-background-elevated border border-border group-hover:border-accent transition-colors duration-300">
-              <span className="w-2 h-2 bg-accent rotate-45 transform group-hover:scale-125 transition-transform duration-300" />
-            </span>
-            <div className="flex items-baseline tracking-tighter">
-              <span className="font-bold text-xl tracking-tight text-foreground font-sans">
-                FYRN
-              </span>
-              <span className="font-light text-xl tracking-tight text-foreground-muted ml-0.5">
-                MEDIA
-              </span>
-            </div>
+            <FyrnLogo />
           </Link>
 
           {/* Desktop Navigation Links */}

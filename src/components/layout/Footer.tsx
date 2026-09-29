@@ -4,6 +4,7 @@ import { siteConfig } from "@/lib/constants/site";
 import { Container } from "@/components/ui/Container";
 import { Text } from "@/components/ui/Text";
 import { Badge } from "@/components/ui/Badge";
+import { FyrnLogo } from "@/components/brand/FyrnLogo";
 import { ArrowUpRight } from "lucide-react";
 
 export function Footer() {
@@ -18,21 +19,16 @@ export function Footer() {
           <div className="lg:col-span-5 space-y-6">
             <Link
               href="/"
-              className="inline-flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-              aria-label="FyrnMedia Home"
+              className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              aria-label="Fyrn Media home"
             >
-              <span className="flex items-center justify-center w-6 h-6 bg-background-elevated border border-border">
-                <span className="w-1.5 h-1.5 bg-accent rotate-45 transform" />
-              </span>
-              <span className="font-bold text-xl tracking-tight text-foreground font-sans">
-                FYRN<span className="font-light text-foreground-muted">MEDIA</span>
-              </span>
+              <FyrnLogo />
             </Link>
 
             <Text variant="body" className="max-w-md text-foreground-muted leading-relaxed">
-              Architectural digital growth studio engineering algorithmic
-              authority, ultra-fast web systems, and organic market dominance
-              for forward-thinking brands.
+              We make AI useful in everyday life through thoughtful strategy,
+              digital experiences, and technology that helps people and
+              ambitious brands move forward.
             </Text>
 
             <div className="pt-2 flex items-center gap-4">
