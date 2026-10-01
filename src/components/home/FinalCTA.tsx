@@ -82,7 +82,7 @@ export function FinalCTA() {
             {/* Primary */}
             <Link
               href="/contact"
-              className="group relative inline-flex items-center gap-2.5 bg-accent hover:bg-accent-hover text-white font-semibold text-base px-8 py-4 rounded-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background overflow-hidden"
+              className="group relative inline-flex items-center gap-2.5 bg-accent hover:bg-accent-hover hover:-translate-y-px hover:shadow-md hover:shadow-accent/20 text-white font-semibold text-base px-8 py-4 rounded-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background overflow-hidden"
             >
               <span className="relative z-10">Start a Conversation</span>
               <ArrowUpRight

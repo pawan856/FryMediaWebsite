@@ -20,7 +20,7 @@ export function Button({
   ...props
 }: ButtonProps) {
   const baseClasses =
-    "inline-flex items-center justify-center font-medium transition-all duration-300 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-[0.98] select-none group relative overflow-hidden";
+    "inline-flex items-center justify-center font-medium transition-all duration-300 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-[0.99] select-none group relative overflow-hidden";
 
   const sizeClasses = {
     sm: "text-xs px-3.5 py-1.5 gap-2",
@@ -30,7 +30,7 @@ export function Button({
 
   const variantClasses = {
     primary:
-      "bg-accent text-white hover:bg-accent-hover shadow-accent/20 hover:shadow-accent/40 shadow-lg font-semibold",
+      "bg-accent text-white hover:bg-accent-hover hover:-translate-y-px shadow-sm hover:shadow-md hover:shadow-accent/20 font-semibold",
     secondary:
       "bg-background-surface hover:bg-background-highlight text-foreground border border-border hover:border-border-hover",
     outline:

@@ -11,20 +11,69 @@ import { TrackedLink } from "@/components/analytics/TrackedLink";
 // Lightweight CSS-based signal visualization — no canvas / heavy libs
 function HeroVisual() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
 
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    const handleMouseMove = (e: MouseEvent) => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const coarsePointer = window.matchMedia("(pointer: coarse)");
+    if (reducedMotion.matches || coarsePointer.matches) return;
+
+    let frame = 0;
+    let pointerX = 0.5;
+    let pointerY = 0.5;
+    const handlePointerMove = (event: PointerEvent) => {
+      if (
+        event.pointerType !== "mouse" ||
+        reducedMotion.matches ||
+        coarsePointer.matches
+      ) {
+        return;
+      }
       const rect = el.getBoundingClientRect();
-      setMousePos({
-        x: (e.clientX - rect.left) / rect.width,
-        y: (e.clientY - rect.top) / rect.height,
+      pointerX = (event.clientX - rect.left) / rect.width;
+      pointerY = (event.clientY - rect.top) / rect.height;
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        const offsetX = (pointerX - 0.5) * 4;
+        const offsetY = (pointerY - 0.5) * 4;
+        const distanceFromCenter = Math.hypot(pointerX - 0.5, pointerY - 0.5);
+        el.style.setProperty("--parallax-x", `${offsetX}px`);
+        el.style.setProperty("--parallax-y", `${offsetY}px`);
+        el.style.setProperty("--grid-x", `${offsetX * 0.2}px`);
+        el.style.setProperty("--grid-y", `${offsetY * 0.2}px`);
+        el.style.setProperty("--network-x", `${offsetX * 0.55}px`);
+        el.style.setProperty("--network-y", `${offsetY * 0.55}px`);
+        el.style.setProperty("--labels-x", `${offsetX * 0.9}px`);
+        el.style.setProperty("--labels-y", `${offsetY * 0.9}px`);
+        el.dataset.hovering = "true";
+        el.dataset.nearCenter = String(distanceFromCenter < 0.22);
+        el.closest("[data-hero-section]")?.setAttribute("data-visual-active", "true");
       });
     };
-    el.addEventListener("mousemove", handleMouseMove);
-    return () => el.removeEventListener("mousemove", handleMouseMove);
+    const resetPointer = () => {
+      if (frame) window.cancelAnimationFrame(frame);
+      frame = 0;
+      el.style.removeProperty("--parallax-x");
+      el.style.removeProperty("--parallax-y");
+      el.style.removeProperty("--grid-x");
+      el.style.removeProperty("--grid-y");
+      el.style.removeProperty("--network-x");
+      el.style.removeProperty("--network-y");
+      el.style.removeProperty("--labels-x");
+      el.style.removeProperty("--labels-y");
+      el.dataset.hovering = "false";
+      el.dataset.nearCenter = "false";
+      el.closest("[data-hero-section]")?.removeAttribute("data-visual-active");
+    };
+    el.addEventListener("pointermove", handlePointerMove);
+    el.addEventListener("pointerleave", resetPointer);
+    return () => {
+      el.removeEventListener("pointermove", handlePointerMove);
+      el.removeEventListener("pointerleave", resetPointer);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   // Node positions for the network visualization
@@ -49,18 +98,17 @@ function HeroVisual() {
     [3, 8], [4, 9], [5, 9], [10, 0], [11, 2],
   ];
 
-  const parallaxX = (mousePos.x - 0.5) * 8;
-  const parallaxY = (mousePos.y - 0.5) * 8;
-
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-full select-none"
+      className="hero-network relative w-full h-full select-none"
+      data-hovering="false"
+      data-near-center="false"
       aria-hidden="true"
     >
       {/* Background grid */}
       <div
-        className="absolute inset-0"
+        className="hero-visual-grid absolute inset-0"
         style={{
           backgroundImage:
             "linear-gradient(to right, rgba(24,60,46,0.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(24,60,46,0.045) 1px, transparent 1px)",
@@ -70,18 +118,20 @@ function HeroVisual() {
 
       {/* Accent radial glow — follows mouse subtly */}
       <div
-        className="absolute inset-0 transition-all duration-700 ease-out"
+        className="hero-visual-glow absolute inset-0"
         style={{
-          background: `radial-gradient(ellipse 55% 45% at ${50 + parallaxX * 0.5}% ${50 + parallaxY * 0.5}%, rgba(112,157,119,0.18) 0%, transparent 70%)`,
+          background:
+            "radial-gradient(ellipse 55% 45% at calc(50% + var(--parallax-x, 0px)) calc(50% + var(--parallax-y, 0px)), rgba(112,157,119,0.18) 0%, transparent 70%)",
         }}
       />
 
       {/* Network SVG */}
       <svg
         viewBox="0 0 100 100"
-        className="absolute inset-0 w-full h-full transition-transform duration-700 ease-out"
+        className="hero-visual-lines absolute inset-0 w-full h-full"
         style={{
-          transform: `translate(${parallaxX * 0.3}px, ${parallaxY * 0.3}px)`,
+          transform:
+            "translate3d(var(--network-x, 0px), var(--network-y, 0px), 0)",
         }}
         preserveAspectRatio="xMidYMid meet"
       >
@@ -89,6 +139,7 @@ function HeroVisual() {
         {edges.map(([from, to], i) => (
           <line
             key={i}
+            className="hero-network-edge"
             x1={nodes[from].cx}
             y1={nodes[from].cy}
             x2={nodes[to].cx}
@@ -102,6 +153,7 @@ function HeroVisual() {
         {[0, 1, 2].map((i) => (
           <line
             key={`accent-${i}`}
+            className="hero-network-highlight-edge"
             x1={nodes[0].cx}
             y1={nodes[0].cy}
             x2={nodes[edges[i][1]].cx}
@@ -113,7 +165,7 @@ function HeroVisual() {
 
         {/* Nodes */}
         {nodes.map((node, i) => (
-          <g key={i}>
+          <g key={i} className={i === 0 ? "hero-network-center" : undefined}>
             {/* Pulse ring on center node */}
             {i === 0 && (
               <>
@@ -124,6 +176,7 @@ function HeroVisual() {
                   fill="none"
                   stroke="rgba(112,157,119,0.28)"
                   strokeWidth="0.5"
+                  className="hero-network-pulse"
                   style={{
                     animation: "pulse-ring 3s ease-out infinite",
                   }}
@@ -173,9 +226,10 @@ function HeroVisual() {
 
       {/* Data labels — floating, subtle */}
       <div
-        className="absolute inset-0 transition-transform duration-700 ease-out"
+        className="hero-visual-labels absolute inset-0"
         style={{
-          transform: `translate(${parallaxX * 0.5}px, ${parallaxY * 0.5}px)`,
+          transform:
+            "translate3d(var(--labels-x, 0px), var(--labels-y, 0px), 0)",
         }}
       >
         {[
@@ -215,6 +269,7 @@ export function Hero() {
 
   return (
     <section
+      data-hero-section
       className="relative w-full min-h-screen flex items-center overflow-hidden pt-24 pb-16 md:pt-32 md:pb-24"
       aria-labelledby="hero-heading"
     >
@@ -275,7 +330,7 @@ export function Hero() {
                 <br />
                 life better
                 <br />
-                <span className="text-accent">with AI.</span>
+                <span className="hero-highlight text-accent">with AI.</span>
               </h1>
             </div>
 
@@ -307,7 +362,7 @@ export function Hero() {
               <TrackedLink
                 href="/contact"
                 event="hero_cta_click"
-                className="group relative inline-flex items-center gap-2.5 bg-accent hover:bg-accent-hover text-white font-semibold text-sm px-6 py-3.5 rounded-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background overflow-hidden"
+                className="group relative inline-flex items-center gap-2.5 bg-accent hover:bg-accent-hover hover:-translate-y-px hover:shadow-md hover:shadow-accent/20 text-white font-semibold text-sm px-6 py-3.5 rounded-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background overflow-hidden"
               >
                 <span className="relative z-10">Let&apos;s Talk</span>
                 <ArrowUpRight
@@ -367,7 +422,7 @@ export function Hero() {
             style={{ transitionDelay: "200ms" }}
           >
             {/* Outer border frame */}
-            <div className="absolute inset-0 border border-border rounded-sm overflow-hidden">
+            <div className="hero-visual-frame absolute inset-0 border border-border rounded-sm overflow-hidden">
               <HeroVisual />
             </div>
 

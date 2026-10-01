@@ -81,11 +81,17 @@ export function Navbar() {
                     className="relative"
                     onMouseEnter={() => setServicesDropdownOpen(true)}
                     onMouseLeave={() => setServicesDropdownOpen(false)}
+                    onFocusCapture={() => setServicesDropdownOpen(true)}
+                    onBlurCapture={(event) => {
+                      if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+                        setServicesDropdownOpen(false);
+                      }
+                    }}
                   >
                     <Link
                       href={item.href}
                       className={cn(
-                        "inline-flex items-center gap-1.5 py-2 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm",
+                        "group relative inline-flex items-center gap-1.5 py-2 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm",
                         isActive
                           ? "text-foreground font-semibold"
                           : "text-foreground-muted hover:text-foreground"
@@ -96,8 +102,15 @@ export function Navbar() {
                       <span>{item.name}</span>
                       <ChevronDown
                         className={cn(
-                          "w-3.5 h-3.5 transition-transform duration-200 text-foreground-subtle",
+                          "w-3.5 h-3.5 transition-transform duration-200 text-foreground-subtle group-hover:translate-y-0.5",
                           isDropdownExpanded && "rotate-180 text-foreground"
+                        )}
+                      />
+                      <span
+                        className={cn(
+                          "absolute bottom-0 left-0 h-[2px] w-full origin-left scale-x-0 bg-accent transition-transform duration-300",
+                          isActive && "scale-x-100",
+                          "group-hover:scale-x-100"
                         )}
                       />
                     </Link>
@@ -111,6 +124,8 @@ export function Navbar() {
                         !isDropdownExpanded &&
                           "opacity-0 -translate-y-2 pointer-events-none"
                       )}
+                      aria-hidden={!isDropdownExpanded}
+                      inert={!isDropdownExpanded}
                     >
                       <div className="p-3 bg-background-elevated/95 backdrop-blur-xl border border-border shadow-2xl rounded-sm">
                         <div className="text-[10px] font-mono uppercase tracking-widest text-foreground-subtle px-3 py-1 mb-1">
@@ -120,11 +135,15 @@ export function Navbar() {
                           <Link
                             key={sub.name}
                             href={sub.href}
-                            className="block p-3 rounded-sm hover:bg-background-surface transition-colors group"
+                            aria-current={pathname === sub.href ? "page" : undefined}
+                            className={cn(
+                              "group block rounded-sm p-3 transition-all duration-200 hover:translate-x-0.5 hover:bg-background-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
+                              pathname === sub.href && "bg-background-surface"
+                            )}
                           >
                             <div className="text-sm font-medium text-foreground group-hover:text-accent flex items-center justify-between">
                               {sub.name}
-                              <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                              <ArrowUpRight className="w-3.5 h-3.5 opacity-0 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" />
                             </div>
                             <p className="text-xs text-foreground-muted mt-1 leading-snug">
                               {sub.description}
