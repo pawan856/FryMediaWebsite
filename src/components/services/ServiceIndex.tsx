@@ -37,7 +37,7 @@ const serviceCatalog: ServiceItem[] = [
     description:
       "An emerging capability focused on clearer entities, useful source material, and structured digital signals across changing discovery environments.",
     status: "emerging",
-    link: "/services/geo",
+    link: "/geo",
     linkLabel: "Explore GEO",
     tags: ["Entity Clarity", "Source Quality", "Structured Information"],
   },

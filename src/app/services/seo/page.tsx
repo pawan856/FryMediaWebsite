@@ -3,6 +3,7 @@ import { constructMetadata } from "@/lib/utils/seo";
 import { SeoHero } from "@/components/seo/SeoHero";
 import { WhatSeoMeansToday } from "@/components/seo/WhatSeoMeansToday";
 import { SeoPillars } from "@/components/seo/SeoPillars";
+import { SeoPracticeAreas } from "@/components/seo/SeoPracticeAreas";
 import { TechnicalSeoSection } from "@/components/seo/TechnicalSeoSection";
 import { SearchStrategySection } from "@/components/seo/SearchStrategySection";
 import { ContentSection } from "@/components/seo/ContentSection";
@@ -19,7 +20,7 @@ import { Breadcrumbs, SeoServiceStructuredData } from "@/components/seo/Structur
 export const metadata: Metadata = constructMetadata({
   title: "SEO Services — Search Visibility & Organic Growth | FyrnMedia",
   description:
-    "FyrnMedia's organic search engineering discipline: technical crawl architecture, entity knowledge graphs, Core Web Vitals, and intent-driven organic market capture.",
+    "FyrnMedia SEO spans technical foundations, semantic and on-page work, topical authority, digital PR, local, e-commerce, SaaS/B2B, and international search.",
   path: "/services/seo",
 });
 
@@ -44,6 +45,8 @@ export default function SeoServicePage() {
 
       {/* 3. The 6 SEO Pillars */}
       <SeoPillars />
+
+      <SeoPracticeAreas />
 
       {/* 4. Technical SEO Deep Dive with CrawlGraph */}
       <TechnicalSeoSection />

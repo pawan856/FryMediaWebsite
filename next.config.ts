@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  trailingSlash: false,
   poweredByHeader: false,
   images: {
     formats: ["image/avif", "image/webp"],
@@ -11,6 +12,12 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
       },
     ],
+  },
+  async redirects() {
+    return [
+      { source: "/seo", destination: "/services/seo", permanent: true },
+      { source: "/services/geo", destination: "/geo", permanent: true },
+    ];
   },
   async headers() {
     const isDevelopment = process.env.NODE_ENV !== "production";

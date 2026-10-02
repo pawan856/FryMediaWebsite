@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 import Link from "next/link";
 import { useInView } from "@/lib/hooks/useInView";
 import { Container } from "@/components/ui/Container";
+import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { cn } from "@/lib/utils/cn";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 
@@ -80,8 +81,9 @@ export function FinalCTA() {
             style={{ transitionDelay: "200ms" }}
           >
             {/* Primary */}
-            <Link
+            <TrackedLink
               href="/contact"
+              event="contact_cta_click"
               className="group relative inline-flex items-center gap-2.5 bg-accent hover:bg-accent-hover hover:-translate-y-px hover:shadow-md hover:shadow-accent/20 text-white font-semibold text-base px-8 py-4 rounded-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background overflow-hidden"
             >
               <span className="relative z-10">Start a Conversation</span>
@@ -90,7 +92,7 @@ export function FinalCTA() {
                 aria-hidden="true"
               />
               <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-[0.08] transition-opacity duration-300" />
-            </Link>
+            </TrackedLink>
 
             {/* Secondary */}
             <Link

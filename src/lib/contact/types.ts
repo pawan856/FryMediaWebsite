@@ -1,6 +1,12 @@
 export const contactServices = [
   "seo",
   "geo",
+  "ai_visibility_audit",
+  "content_marketing",
+  "performance_marketing",
+  "ai_automation",
+  "web_development",
+  "analytics_strategy",
   "something_else",
 ] as const;
 

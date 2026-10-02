@@ -10,6 +10,8 @@ import { ProofSection } from "@/components/home/ProofSection";
 import { FinalCTA } from "@/components/home/FinalCTA";
 import { TrustStrip } from "@/components/trust/TrustStrip";
 import { ProblemSolution } from "@/components/trust/ProblemSolution";
+import { AiSearchFeature } from "@/components/home/AiSearchFeature";
+import { PlatformIndex } from "@/components/home/PlatformIndex";
 
 export const metadata: Metadata = constructMetadata({
   title: "Fyrn Media — AI for Everyday Life",
@@ -30,6 +32,7 @@ export default function HomePage() {
 
       {/* 3. What FyrnMedia does */}
       <WhatWeDo />
+      <AiSearchFeature />
       <ProblemSolution />
 
       {/* 4. SEO Spotlight */}
@@ -43,6 +46,7 @@ export default function HomePage() {
 
       {/* 7. Proof / Results */}
       <ProofSection />
+      <PlatformIndex />
 
       {/* 8. Closing CTA */}
       <FinalCTA />

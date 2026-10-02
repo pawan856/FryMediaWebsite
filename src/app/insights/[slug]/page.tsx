@@ -5,6 +5,7 @@ import { ArticleStructuredData } from "@/components/seo/StructuredData";
 import { ArticleDetail } from "@/components/insights/ArticleDetail";
 import { articles, getArticle } from "@/content/insights/articles";
 import { isPublishableArticle } from "@/lib/insights/articles";
+import { ContentViewTracker } from "@/components/analytics/ContentViewTracker";
 
 export function generateStaticParams() {
   return articles.filter(isPublishableArticle).map((article) => ({ slug: article.slug }));
@@ -21,5 +22,5 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
   const { slug } = await params;
   const article = getArticle(slug);
   if (!article || !isPublishableArticle(article)) notFound();
-  return <><ArticleStructuredData article={article} /><ArticleDetail article={article} allArticles={articles} /></>;
+  return <><ContentViewTracker event="insight_viewed" page={`/insights/${article.slug}`} /><ArticleStructuredData article={article} /><ArticleDetail article={article} allArticles={articles} /></>;
 }

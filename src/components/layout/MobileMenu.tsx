@@ -7,8 +7,11 @@ import { usePathname } from "next/navigation";
 import { siteConfig } from "@/lib/constants/site";
 import { FyrnLogo } from "@/components/brand/FyrnLogo";
 import { getActiveNavigationHref } from "@/lib/utils/navigation";
-import { ArrowUpRight, X } from "lucide-react";
+import { ArrowUpRight, ChevronDown, X } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
+import { industryNavigation, serviceNavigation } from "@/lib/constants/navigation";
+import { analyticsEvents } from "@/lib/analytics/events";
+import { track } from "@/lib/analytics/track";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -23,6 +26,8 @@ export function MobileMenu({ isOpen, onClose, triggerRef }: MobileMenuProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const [expandedNavSection, setExpandedNavSection] = useState<"services" | "industries" | null>(null);
+  const [expandedServiceGroup, setExpandedServiceGroup] = useState<string | null>(null);
 
   useEffect(() => {
     setPortalReady(true);
@@ -88,7 +93,7 @@ export function MobileMenu({ isOpen, onClose, triggerRef }: MobileMenuProps) {
         first.focus();
       }
     };
-    const desktopBreakpoint = window.matchMedia("(min-width: 768px)");
+    const desktopBreakpoint = window.matchMedia("(min-width: 1024px)");
     const closeOnDesktop = (event: MediaQueryListEvent) => {
       if (event.matches) onClose();
     };
@@ -122,7 +127,7 @@ export function MobileMenu({ isOpen, onClose, triggerRef }: MobileMenuProps) {
     <div
       ref={overlayRef}
       className={cn(
-        "mobile-navigation-overlay fixed inset-0 z-40 md:hidden transition-opacity duration-300",
+        "mobile-navigation-overlay fixed inset-0 z-40 lg:hidden transition-opacity duration-300",
         isOpen
           ? "opacity-100 pointer-events-auto"
           : "opacity-0 pointer-events-none"
@@ -185,6 +190,127 @@ export function MobileMenu({ isOpen, onClose, triggerRef }: MobileMenuProps) {
               const isActive = activeNavigationHref === item.href;
               const isCurrentPage = pathname === item.href;
 
+              if (item.href === "/services") {
+                const isServicesExpanded = expandedNavSection === "services";
+                return (
+                  <li key={item.name} className="border-b border-border/40 pb-3">
+                    <div className="flex items-center justify-between gap-4">
+                      <Link
+                        href={item.href}
+                        onClick={onClose}
+                        aria-current={isActive ? "location" : undefined}
+                        className={cn("text-2xl font-bold tracking-tight", isActive ? "text-accent" : "text-foreground")}
+                      >
+                        {item.name}
+                      </Link>
+                      <button
+                        type="button"
+                        aria-expanded={isServicesExpanded}
+                        aria-controls="mobile-service-groups"
+                        onClick={() => {
+                          setExpandedNavSection((current) => current === "services" ? null : "services");
+                          setExpandedServiceGroup(null);
+                          if (expandedNavSection !== "services") track(analyticsEvents.servicesMenuOpened, { page: pathname, source: "mobile_navigation" });
+                        }}
+                        className="flex h-11 w-11 items-center justify-center border border-border text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                        aria-label={isServicesExpanded ? "Collapse service categories" : "Expand service categories"}
+                      >
+                        <ChevronDown className={cn("h-5 w-5 transition-transform duration-200", isServicesExpanded && "rotate-180")} />
+                      </button>
+                    </div>
+                    <div
+                      id="mobile-service-groups"
+                      className={cn("grid transition-[grid-template-rows,opacity] duration-300", isServicesExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0")}
+                      aria-hidden={!isServicesExpanded}
+                      inert={!isServicesExpanded}
+                    >
+                      <div className="min-h-0 overflow-hidden">
+                        <div className="space-y-2 pt-4">
+                          {serviceNavigation.map((group) => {
+                            const isGroupExpanded = expandedServiceGroup === group.id;
+                            const isGroupCurrent = pathname === group.href || pathname.startsWith(`${group.href}/`);
+                            return (
+                              <section key={group.id} className="border-l border-border pl-3">
+                                <div className="flex items-center gap-2">
+                                  <Link
+                                    href={group.href}
+                                    onClick={() => {
+                                      track(analyticsEvents.serviceCategoryClick, { page: group.href, service: group.name });
+                                      if (group.flagship) track(analyticsEvents.aiSearchVisibilityClick, { page: group.href });
+                                      onClose();
+                                    }}
+                                    aria-current={isGroupCurrent ? "page" : undefined}
+                                    className={cn("min-h-11 flex-1 py-2 text-sm font-semibold", isGroupCurrent ? "text-accent" : "text-foreground")}
+                                  >
+                                    {group.name}
+                                    {group.flagship && <span className="ml-2 text-[9px] font-mono uppercase tracking-widest text-accent">Flagship</span>}
+                                  </Link>
+                                  <button
+                                    type="button"
+                                    aria-expanded={isGroupExpanded}
+                                    aria-controls={`mobile-service-${group.id}`}
+                                    onClick={() => setExpandedServiceGroup((current) => current === group.id ? null : group.id)}
+                                    className="flex h-11 w-11 items-center justify-center text-foreground-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                                    aria-label={`${isGroupExpanded ? "Collapse" : "Expand"} ${group.name}`}
+                                  >
+                                    <ChevronDown className={cn("h-4 w-4 transition-transform duration-200", isGroupExpanded && "rotate-180")} />
+                                  </button>
+                                </div>
+                                <div
+                                  id={`mobile-service-${group.id}`}
+                                  className={cn("grid transition-[grid-template-rows,opacity] duration-300", isGroupExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0")}
+                                  aria-hidden={!isGroupExpanded}
+                                  inert={!isGroupExpanded}
+                                >
+                                  <ul className="min-h-0 overflow-hidden space-y-1 pb-2">
+                                    {group.items.map((sub) => (
+                                      <li key={sub.href}>
+                                        <Link
+                                          href={sub.href}
+                                          onClick={() => {
+                                            track(analyticsEvents.serviceCategoryClick, { page: sub.href, service: sub.name });
+                                            if (sub.href === "/aeo") track(analyticsEvents.aeoClick, { page: sub.href });
+                                            if (sub.href === "/geo") track(analyticsEvents.geoClick, { page: sub.href });
+                                            onClose();
+                                          }}
+                                          aria-current={pathname === sub.href.split("#")[0] ? "page" : undefined}
+                                          className="flex min-h-10 items-center px-2 text-sm text-foreground-muted transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                                        >
+                                          {sub.name}
+                                        </Link>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              </section>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                );
+              }
+
+              if (item.href === "/industries") {
+                const isIndustriesExpanded = expandedNavSection === "industries";
+                return (
+                  <li key={item.name} className="border-b border-border/40 pb-3">
+                    <div className="flex items-center justify-between gap-4">
+                      <Link href={item.href} onClick={onClose} aria-current={isActive ? "page" : undefined} className={cn("py-2 text-2xl font-bold tracking-tight", isActive ? "text-accent" : "text-foreground")}>{item.name}</Link>
+                      <button type="button" aria-expanded={isIndustriesExpanded} aria-controls="mobile-industries" onClick={() => setExpandedNavSection((current) => current === "industries" ? null : "industries")} className="flex h-11 w-11 items-center justify-center border border-border text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" aria-label={`${isIndustriesExpanded ? "Collapse" : "Expand"} industries`}>
+                        <ChevronDown className={cn("h-5 w-5 transition-transform duration-200", isIndustriesExpanded && "rotate-180")} />
+                      </button>
+                    </div>
+                    <div id="mobile-industries" className={cn("grid transition-[grid-template-rows,opacity] duration-300", isIndustriesExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0")} aria-hidden={!isIndustriesExpanded} inert={!isIndustriesExpanded}>
+                      <ul className="min-h-0 overflow-hidden border-l border-border pl-4">
+                        {industryNavigation.map((industry) => <li key={industry.href}><Link href={industry.href} onClick={onClose} aria-current={pathname === industry.href ? "page" : undefined} className="flex min-h-11 items-center text-sm text-foreground-muted transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">{industry.name}</Link></li>)}
+                      </ul>
+                    </div>
+                  </li>
+                );
+              }
+
               return (
                 <li key={item.name} className="border-b border-border/40 pb-3">
                   <Link
@@ -218,12 +344,13 @@ export function MobileMenu({ isOpen, onClose, triggerRef }: MobileMenuProps) {
 
         <div className="shrink-0 space-y-4 border-t border-border pt-6">
           <Link
-            href="/contact"
+            href="/audit"
+            onClick={() => track(analyticsEvents.auditCtaClick, { page: "/audit", source: "mobile_navigation" })}
             className="group relative inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-sm bg-accent px-7 py-3.5 text-center text-base font-semibold text-white shadow-lg shadow-accent/20 transition-all duration-300 hover:bg-accent-hover hover:shadow-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-[0.98]"
-            onClick={onClose}
           >
-            Initiate Consultation
+            Free AI Visibility Audit <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
           </Link>
+          <Link href="/contact" onClick={onClose} className="block text-center text-sm text-foreground-muted hover:text-foreground">General enquiry</Link>
 
           <div className="flex items-center justify-between text-xs text-foreground-muted font-mono pt-2">
             <span>{siteConfig.contactEmail}</span>

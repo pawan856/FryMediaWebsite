@@ -5,6 +5,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils/cn";
 import { siteConfig } from "@/lib/constants/site";
+import { serviceNavigation } from "@/lib/constants/navigation";
+import { analyticsEvents } from "@/lib/analytics/events";
+import { track } from "@/lib/analytics/track";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { MobileMenu } from "./MobileMenu";
@@ -20,6 +23,11 @@ export function Navbar() {
   const activeNavigationHref = getActiveNavigationHref(pathname);
   const closeMobileMenu = useCallback(() => setMobileMenuOpen(false), []);
   const mobileMenuTriggerRef = useRef<HTMLButtonElement>(null);
+
+  const openServicesMenu = () => {
+    if (!servicesDropdownOpen) track(analyticsEvents.servicesMenuOpened, { page: pathname });
+    setServicesDropdownOpen(true);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,22 +74,28 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Navigation Links */}
-          <ul className="hidden md:flex items-center gap-8 text-sm font-medium">
+          <ul className="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-medium">
             {siteConfig.navLinks.map((item) => {
               const isActive = activeNavigationHref === item.href;
-              const isServicesRoute =
-                pathname === item.href || pathname.startsWith(`${item.href}/`);
 
               if (item.subItems) {
-                const isDropdownExpanded = servicesDropdownOpen || isServicesRoute;
+                const isDropdownExpanded = servicesDropdownOpen;
 
                 return (
                   <li
                     key={item.name}
                     className="relative"
-                    onMouseEnter={() => setServicesDropdownOpen(true)}
+                    onMouseEnter={openServicesMenu}
                     onMouseLeave={() => setServicesDropdownOpen(false)}
-                    onFocusCapture={() => setServicesDropdownOpen(true)}
+                    onFocusCapture={(event) => {
+                      if (!event.currentTarget.contains(event.relatedTarget as Node | null)) openServicesMenu();
+                    }}
+                    onKeyDown={(event) => {
+                      if (event.key === "Escape") {
+                        setServicesDropdownOpen(false);
+                        event.currentTarget.querySelector("a")?.focus();
+                      }
+                    }}
                     onBlurCapture={(event) => {
                       if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
                         setServicesDropdownOpen(false);
@@ -97,6 +111,7 @@ export function Navbar() {
                           : "text-foreground-muted hover:text-foreground"
                       )}
                       aria-expanded={isDropdownExpanded}
+                      aria-controls="desktop-services-menu"
                       aria-current={pathname === item.href ? "page" : isActive ? "location" : undefined}
                     >
                       <span>{item.name}</span>
@@ -117,8 +132,9 @@ export function Navbar() {
 
                     {/* Dropdown Menu */}
                     <div
+                      id="desktop-services-menu"
                       className={cn(
-                        "absolute left-0 top-full pt-2 w-80 transition-all duration-200 pointer-events-none",
+                        "absolute left-1/2 top-full z-30 w-[min(94vw,1000px)] -translate-x-1/2 pt-3 transition-all duration-200",
                         isDropdownExpanded &&
                           "opacity-100 translate-y-0 pointer-events-auto",
                         !isDropdownExpanded &&
@@ -127,29 +143,68 @@ export function Navbar() {
                       aria-hidden={!isDropdownExpanded}
                       inert={!isDropdownExpanded}
                     >
-                      <div className="p-3 bg-background-elevated/95 backdrop-blur-xl border border-border shadow-2xl rounded-sm">
-                        <div className="text-[10px] font-mono uppercase tracking-widest text-foreground-subtle px-3 py-1 mb-1">
-                          Core Capabilities
-                        </div>
-                        {item.subItems.map((sub) => (
-                          <Link
-                            key={sub.name}
-                            href={sub.href}
-                            aria-current={pathname === sub.href ? "page" : undefined}
-                            className={cn(
-                              "group block rounded-sm p-3 transition-all duration-200 hover:translate-x-0.5 hover:bg-background-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
-                              pathname === sub.href && "bg-background-surface"
-                            )}
-                          >
-                            <div className="text-sm font-medium text-foreground group-hover:text-accent flex items-center justify-between">
-                              {sub.name}
-                              <ArrowUpRight className="w-3.5 h-3.5 opacity-0 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" />
-                            </div>
-                            <p className="text-xs text-foreground-muted mt-1 leading-snug">
-                              {sub.description}
-                            </p>
-                          </Link>
-                        ))}
+                      <div className="grid max-h-[min(72vh,680px)] grid-cols-1 gap-px overflow-y-auto border border-border bg-border shadow-2xl md:grid-cols-2 xl:grid-cols-4">
+                        {serviceNavigation.map((group) => {
+                          const isGroupActive = pathname === group.href || pathname.startsWith(`${group.href}/`);
+                          const isFlagship = group.flagship;
+                          return (
+                            <section
+                              key={group.id}
+                              className={cn(
+                                "bg-background-elevated/95 p-4 backdrop-blur-xl",
+                                isFlagship && "md:col-span-2 xl:col-span-2",
+                                group.id === "seo" && "md:col-span-2 xl:col-span-2"
+                              )}
+                              aria-labelledby={`desktop-service-${group.id}`}
+                            >
+                              <div className="mb-3 flex items-start justify-between gap-3">
+                                <div>
+                                  <p className="text-[9px] font-mono uppercase tracking-widest text-foreground-subtle">
+                                    {group.eyebrow}
+                                  </p>
+                                  <Link
+                                    id={`desktop-service-${group.id}`}
+                                    href={group.href}
+                                    onClick={() => {
+                                      track(analyticsEvents.serviceCategoryClick, { page: group.href, service: group.name });
+                                      if (group.flagship) track(analyticsEvents.aiSearchVisibilityClick, { page: group.href });
+                                    }}
+                                    aria-current={isGroupActive ? "page" : undefined}
+                                    className={cn(
+                                      "mt-1 inline-flex items-center gap-2 text-sm font-semibold text-foreground hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
+                                      isGroupActive && "text-accent"
+                                    )}
+                                  >
+                                    {group.name}
+                                    {isFlagship && <span className="border border-accent/25 bg-accent/5 px-1.5 py-0.5 text-[9px] font-mono uppercase tracking-widest text-accent">Flagship</span>}
+                                  </Link>
+                                </div>
+                                <ArrowUpRight className="h-3.5 w-3.5 shrink-0 text-foreground-subtle" aria-hidden="true" />
+                              </div>
+                              {group.description && <p className="mb-3 max-w-md text-xs leading-relaxed text-foreground-muted">{group.description}</p>}
+                              <ul className={cn("space-y-1", (isFlagship || group.id === "seo") && "grid grid-cols-1 gap-x-3 gap-y-1 sm:grid-cols-2") }>
+                                {group.items.map((sub) => (
+                                  <li key={sub.href}>
+                                    <Link
+                                      href={sub.href}
+                                      onClick={() => {
+                                        track(analyticsEvents.serviceCategoryClick, { page: sub.href, service: sub.name });
+                                        if (sub.href === "/aeo") track(analyticsEvents.aeoClick, { page: sub.href });
+                                        if (sub.href === "/geo") track(analyticsEvents.geoClick, { page: sub.href });
+                                        if (sub.href === "/services/ai-search-visibility") track(analyticsEvents.aiSearchVisibilityClick, { page: sub.href });
+                                      }}
+                                      aria-current={pathname === sub.href.split("#")[0] ? "page" : undefined}
+                                      className="group/link inline-flex min-h-7 w-full items-center justify-between gap-2 rounded-sm px-1.5 text-[11px] leading-snug text-foreground-muted transition-all hover:translate-x-0.5 hover:bg-background-surface hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                                    >
+                                      <span>{sub.name}</span>
+                                      <ArrowUpRight className="h-3 w-3 shrink-0 opacity-0 transition-all group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 group-hover/link:opacity-100" aria-hidden="true" />
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            </section>
+                          );
+                        })}
                       </div>
                     </div>
                   </li>
@@ -182,23 +237,20 @@ export function Navbar() {
           </ul>
 
           {/* Right Action: Let's Talk CTA */}
-          <div className="hidden md:flex items-center gap-4">
-            <Button
-              href="/contact"
-              variant="primary"
-              size="sm"
-              className="text-xs tracking-wide uppercase font-mono px-4 py-2"
-            >
-              <span>Let&apos;s Talk</span>
-              <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </Button>
+          <div className="hidden lg:flex items-center gap-4">
+            <div onClick={() => track(analyticsEvents.contactCtaClick, { page: pathname })}>
+              <Button href="/contact" variant="primary" size="sm" className="text-xs tracking-wide uppercase font-mono px-4 py-2">
+                <span>Let&apos;s Talk</span>
+                <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Button>
+            </div>
           </div>
 
           {/* Mobile Menu Hamburger Button */}
           <button
             type="button"
             ref={mobileMenuTriggerRef}
-            className="md:hidden flex flex-col justify-center items-center w-10 h-10 border border-border rounded-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="lg:hidden flex flex-col justify-center items-center w-10 h-10 border border-border rounded-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             onClick={() => setMobileMenuOpen((open) => !open)}
             aria-expanded={mobileMenuOpen}
             aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}

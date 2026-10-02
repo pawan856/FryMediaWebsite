@@ -146,7 +146,23 @@ export function GeoServiceStructuredData() {
         serviceType: "Emerging AI-assisted discovery strategy",
         description: "An emerging FyrnMedia capability focused on entity clarity, useful source material, and structured digital signals across changing discovery environments.",
         provider: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
-        url: `${siteConfig.url}/services/geo`,
+        url: `${siteConfig.url}/geo`,
+      }}
+    />
+  );
+}
+
+export function EditorialServiceStructuredData({ name, description, path }: { name: string; description: string; path: string }) {
+  return (
+    <JsonLd
+      data={{
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name,
+        description,
+        provider: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
+        areaServed: "Worldwide",
+        url: `${siteConfig.url}${path}`,
       }}
     />
   );

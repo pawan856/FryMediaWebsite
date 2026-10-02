@@ -4,7 +4,7 @@ import { MarketCode } from "@/lib/markets/types";
 export const leadStatuses = ["new", "contacted", "qualified", "proposal", "won", "lost"] as const;
 export type LeadStatus = (typeof leadStatuses)[number];
 export type LeadQuality = "low" | "medium" | "high";
-export type LeadSource = "homepage" | "about" | "services" | "seo" | "geo" | "work" | "insights" | "contact" | "other";
+export type LeadSource = "homepage" | "about" | "services" | "seo" | "geo" | "ai_visibility_audit" | "industries" | "tools" | "work" | "insights" | "contact" | "other";
 
 export interface LeadAttribution {
   source: LeadSource;

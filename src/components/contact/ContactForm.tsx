@@ -3,7 +3,7 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight, Check, LoaderCircle } from "lucide-react";
-import { contactBudgets, ContactFormData } from "@/lib/contact/types";
+import { contactBudgets, contactServices, ContactFormData, ContactService } from "@/lib/contact/types";
 import { validateContactForm } from "@/lib/contact/validation";
 import { trackEvent } from "@/lib/analytics";
 import { track } from "@/lib/analytics/track";
@@ -30,8 +30,28 @@ const budgetLabels: Record<(typeof contactBudgets)[number], string> = {
   not_sure: "Not sure yet",
 };
 
-export function ContactForm() {
-  const [data, setData] = useState(initialData);
+const serviceLabels: Record<ContactService, string> = {
+  seo: "SEO",
+  geo: "Generative Engine Optimization (GEO)",
+  ai_visibility_audit: "AI Search Visibility Audit",
+  content_marketing: "AI-Powered Content & Social",
+  performance_marketing: "Performance Marketing",
+  ai_automation: "Marketing Automation & AI Workflows",
+  web_development: "Web & Technical Build",
+  analytics_strategy: "Analytics & Strategy",
+  something_else: "Something else / exploring",
+};
+
+export function ContactForm({
+  page = "/contact",
+  initialService = "something_else",
+  submitLabel = "Start the Conversation",
+}: {
+  page?: string;
+  initialService?: ContactService;
+  submitLabel?: string;
+}) {
+  const [data, setData] = useState(() => ({ ...initialData, service: initialService }));
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [serverMessage, setServerMessage] = useState("");
@@ -39,11 +59,12 @@ export function ContactForm() {
   const interactedFieldsRef = useRef(new Set<string>());
 
   useEffect(() => {
-    track(analyticsEvents.contactFormView, { page: "/contact" });
+    track(analyticsEvents.contactFormView, { page });
     const service = new URLSearchParams(window.location.search).get("service");
+    const website = new URLSearchParams(window.location.search).get("website");
     const attribution = readAttribution(sessionStorage.getItem(attributionStorageKey));
-    setData((current) => ({ ...current, firstTouch: attribution ? JSON.stringify(attribution.firstTouch) : "", lastTouch: attribution ? JSON.stringify(attribution.lastTouch) : "", referrer: attribution?.referrer || "", ...(service === "seo" || service === "geo" ? { service } : {}) }));
-  }, []);
+    setData((current) => ({ ...current, firstTouch: attribution ? JSON.stringify(attribution.firstTouch) : "", lastTouch: attribution ? JSON.stringify(attribution.lastTouch) : "", referrer: attribution?.referrer || "", ...(website ? { website } : {}), ...(service && contactServices.includes(service as ContactService) ? { service: service as ContactService } : {}) }));
+  }, [page]);
 
   const update = (field: keyof ContactFormData, value: string) => {
     setData((current) => ({ ...current, [field]: value }));
@@ -54,7 +75,7 @@ export function ContactForm() {
     }
     if (!interactedFieldsRef.current.has(field)) {
       interactedFieldsRef.current.add(field);
-      track(analyticsEvents.contactFormFieldInteraction, { page: "/contact" });
+      track(analyticsEvents.contactFormFieldInteraction, { page });
     }
   };
 
@@ -125,9 +146,7 @@ export function ContactForm() {
       <div className="mt-6">
         <label htmlFor="service" className="text-sm font-medium text-foreground">What do you need help with? <span className="text-accent" aria-hidden="true">*</span></label>
         <select id="service" value={data.service} onChange={(event) => update("service", event.target.value)} aria-invalid={Boolean(errors.service)} aria-describedby={errors.service ? "service-error" : undefined} className={fieldClass("service")}>
-          <option value="seo">SEO</option>
-          <option value="geo">AI Search / GEO (emerging capability)</option>
-          <option value="something_else">Something else / exploring</option>
+          {contactServices.map((service) => <option key={service} value={service}>{serviceLabels[service]}</option>)}
         </select>
         <ErrorMessage id="service-error" message={errors.service} />
       </div>
@@ -149,7 +168,7 @@ export function ContactForm() {
 
       {serverMessage && <p className="mt-6 text-sm text-accent" role="alert">{serverMessage}</p>}
       <button type="submit" disabled={status === "sending"} className="group mt-8 inline-flex min-h-12 w-full items-center justify-center gap-2.5 bg-accent px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-accent-hover disabled:cursor-wait disabled:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background">
-        {status === "sending" ? "Sending..." : "Start the Conversation"}
+        {status === "sending" ? "Sending..." : submitLabel}
         {status === "sending" ? <LoaderCircle className="h-4 w-4 animate-spin" aria-hidden="true" /> : <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />}
       </button>
     </form>

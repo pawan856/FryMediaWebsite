@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 
-export default function SeoRedirect() {
-  redirect("/services/seo");
+export default function LegacySeoPage() {
+  permanentRedirect("/services/seo");
 }

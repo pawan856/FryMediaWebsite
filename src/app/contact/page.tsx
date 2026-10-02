@@ -5,6 +5,7 @@ import { ContactHero } from "@/components/contact/ContactHero";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { ContactFAQ } from "@/components/contact/ContactFAQ";
 import { WhatHappensNext } from "@/components/trust/WhatHappensNext";
+import { Breadcrumbs } from "@/components/seo/StructuredData";
 
 export const metadata: Metadata = constructMetadata({
   title: "Contact FyrnMedia — Let's Talk",
@@ -15,6 +16,7 @@ export const metadata: Metadata = constructMetadata({
 export default function ContactPage() {
   return (
     <>
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Contact" }]} />
       <ContactHero />
       <section className="py-16 md:py-28">
         <Container size="wide">

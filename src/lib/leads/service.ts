@@ -38,8 +38,11 @@ export const leadService = new DefaultLeadService();
 export function getLeadSource(landingPage: string): LeadAttribution["source"] {
   if (landingPage === "/") return "homepage";
   if (landingPage.startsWith("/about")) return "about";
+  if (landingPage.startsWith("/audit") || landingPage.startsWith("/ai-visibility-audit")) return "ai_visibility_audit";
+  if (landingPage.startsWith("/industries")) return "industries";
+  if (landingPage.startsWith("/tools")) return "tools";
   if (landingPage.startsWith("/services/seo")) return "seo";
-  if (landingPage.startsWith("/services/geo")) return "geo";
+  if (landingPage.startsWith("/services/geo") || landingPage.startsWith("/geo")) return "geo";
   if (landingPage.startsWith("/services")) return "services";
   if (landingPage.startsWith("/work")) return "work";
   if (landingPage.startsWith("/insights")) return "insights";

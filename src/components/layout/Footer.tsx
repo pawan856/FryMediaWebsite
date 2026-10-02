@@ -1,10 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import { siteConfig } from "@/lib/constants/site";
+import { footerNavigation } from "@/lib/constants/navigation";
 import { Container } from "@/components/ui/Container";
 import { Text } from "@/components/ui/Text";
-import { Badge } from "@/components/ui/Badge";
 import { FyrnLogo } from "@/components/brand/FyrnLogo";
+import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { ArrowUpRight } from "lucide-react";
 
 export function Footer() {
@@ -14,9 +15,9 @@ export function Footer() {
     <footer className="w-full bg-background border-t border-border pt-20 pb-12 overflow-hidden">
       <Container size="wide">
         {/* Top Editorial Row */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 border-b border-border">
+        <div className="grid grid-cols-1 gap-12 border-b border-border pb-16 lg:grid-cols-12">
           {/* Brand Mission Column */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="space-y-6 lg:col-span-4">
             <Link
               href="/"
               className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
@@ -31,25 +32,16 @@ export function Footer() {
               ambitious brands move forward.
             </Text>
 
-            <div className="pt-2 flex items-center gap-4">
-              <Badge variant="outline" showDot className="text-[11px]">
-                Global Nodes: Operational
-              </Badge>
-              <span className="text-xs font-mono text-foreground-subtle">
-                EST / GMT / SGT
-              </span>
-            </div>
           </div>
 
           {/* Navigation Columns */}
-          <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8">
-            {/* Capabilities */}
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 lg:col-span-8 lg:grid-cols-3">
             <div>
               <div className="text-xs font-mono uppercase tracking-widest text-foreground-subtle mb-4">
-                Capabilities
+                Services
               </div>
               <ul className="space-y-2.5 text-sm">
-                {siteConfig.footerLinks.capabilities.map((link) => (
+                {footerNavigation.services.map((link) => (
                   <li key={link.name}>
                     <Link
                       href={link.href}
@@ -63,13 +55,12 @@ export function Footer() {
               </ul>
             </div>
 
-            {/* Company */}
             <div>
               <div className="text-xs font-mono uppercase tracking-widest text-foreground-subtle mb-4">
-                Company
+                Explore
               </div>
               <ul className="space-y-2.5 text-sm">
-                {siteConfig.footerLinks.company.map((link) => (
+                {footerNavigation.explore.map((link) => (
                   <li key={link.name}>
                     <Link
                       href={link.href}
@@ -83,25 +74,33 @@ export function Footer() {
               </ul>
             </div>
 
-            {/* Strategic Consultation */}
-            <div className="col-span-2 sm:col-span-1">
+            <div className="col-span-2 lg:col-span-1">
               <div className="text-xs font-mono uppercase tracking-widest text-foreground-subtle mb-4">
-                Inquiries
+                Contact
               </div>
-              <div className="space-y-3">
-                <Text variant="small" className="text-foreground-muted">
-                  Direct engagement inquiries:
-                </Text>
+              <ul className="space-y-2.5 text-sm">
+                {footerNavigation.contact.map((link) => (
+                  <li key={link.name}>
+                    {link.href === "/audit" ? (
+                      <TrackedLink href={link.href} event="audit_cta_click" className="group inline-flex items-center gap-1 text-foreground-muted transition-colors hover:text-foreground">
+                        <span>{link.name}</span><ArrowUpRight className="h-3 w-3 -translate-x-1 text-accent opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
+                      </TrackedLink>
+                    ) : (
+                      <Link href={link.href} className="group inline-flex items-center gap-1 text-foreground-muted transition-colors hover:text-foreground">
+                        <span>{link.name}</span><ArrowUpRight className="h-3 w-3 -translate-x-1 text-accent opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
+                      </Link>
+                    )}
+                  </li>
+                ))}
+                <li className="pt-2">
                 <a
                   href={`mailto:${siteConfig.contactEmail}`}
                   className="block text-sm font-mono text-foreground hover:text-accent transition-colors break-all"
                 >
                   {siteConfig.contactEmail}
                 </a>
-                <div className="pt-2 text-xs text-foreground-subtle font-mono">
-                  {siteConfig.address}
-                </div>
-              </div>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -112,15 +111,15 @@ export function Footer() {
             © {currentYear} {siteConfig.name}. All rights reserved. Architectural
             Performance & Strategy.
           </div>
-          <div className="flex items-center gap-6">
-            {siteConfig.footerLinks.governance.map((item) => (
-              <a
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            {footerNavigation.governance.map((item) => (
+              <Link
                 key={item.name}
                 href={item.href}
                 className="hover:text-foreground transition-colors"
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
