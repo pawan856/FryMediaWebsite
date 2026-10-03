@@ -311,6 +311,41 @@ export function MobileMenu({ isOpen, onClose, triggerRef }: MobileMenuProps) {
                 );
               }
 
+              if (item.children) {
+                return (
+                  <li key={item.name} className="border-b border-border/40 pb-3">
+                    <Link
+                      href={item.href}
+                      onClick={onClose}
+                      className="flex items-center justify-between group"
+                      aria-current={isCurrentPage ? "page" : isActive ? "location" : undefined}
+                    >
+                      <div className="flex items-center gap-4">
+                        <span className="text-xs font-mono text-foreground-subtle">0{idx + 1}</span>
+                        <span className={cn("text-2xl font-bold tracking-tight transition-colors", isActive ? "text-accent" : "text-foreground group-hover:text-accent")}>
+                          {item.name}
+                        </span>
+                      </div>
+                      <ArrowUpRight className="h-5 w-5 text-foreground-subtle transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </Link>
+                    <ul className="ml-9 mt-2 border-l border-border pl-4">
+                      {item.children.map((child) => (
+                        <li key={child.href}>
+                          <Link
+                            href={child.href}
+                            onClick={onClose}
+                            aria-current={pathname === child.href ? "page" : undefined}
+                            className="flex min-h-11 items-center text-sm text-foreground-muted transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                          >
+                            {child.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                );
+              }
+
               return (
                 <li key={item.name} className="border-b border-border/40 pb-3">
                   <Link

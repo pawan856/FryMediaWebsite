@@ -165,6 +165,46 @@ export function Navbar() {
                 );
               }
 
+              if (item.children) {
+                return (
+                  <li key={item.name} className="group relative">
+                    <Link
+                      href={item.href}
+                      className={cn(
+                        "group/link relative inline-flex items-center gap-1.5 py-2 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm",
+                        isActive
+                          ? "text-foreground font-semibold"
+                          : "text-foreground-muted hover:text-foreground"
+                      )}
+                      aria-current={pathname === item.href ? "page" : isActive ? "location" : undefined}
+                    >
+                      {item.name}
+                      <ChevronDown className="h-3.5 w-3.5 text-foreground-subtle transition-transform duration-200 group-hover/link:translate-y-0.5" />
+                      <span
+                        className={cn(
+                          "absolute bottom-0 left-0 h-[2px] w-full origin-left scale-x-0 bg-accent transition-transform duration-300 group-hover/link:scale-x-100",
+                          isActive && "scale-x-100"
+                        )}
+                      />
+                    </Link>
+                    <ul className="invisible absolute left-1/2 top-full z-50 w-40 -translate-x-1/2 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                      {item.children.map((child) => (
+                        <li key={child.href}>
+                          <Link
+                            href={child.href}
+                            className="flex items-center justify-between border border-border bg-background px-4 py-3 text-sm text-foreground shadow-lg transition-colors hover:bg-background-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                            aria-current={pathname === child.href ? "page" : undefined}
+                          >
+                            {child.name}
+                            <ArrowUpRight className="h-3.5 w-3.5 text-foreground-subtle" aria-hidden="true" />
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                );
+              }
+
               return (
                 <li key={item.name}>
                   <Link

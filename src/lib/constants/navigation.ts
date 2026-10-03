@@ -127,7 +127,11 @@ export const siteNavigation = [
   { name: "Work", href: "/work" },
   { name: "Insights", href: "/insights" },
   { name: "Tools", href: "/tools" },
-  { name: "About", href: "/about" },
+  {
+    name: "About",
+    href: "/about",
+    children: [{ name: "Team", href: "/about/team" }],
+  },
 ];
 
 export const footerNavigation = {

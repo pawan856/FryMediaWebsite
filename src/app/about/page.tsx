@@ -8,9 +8,8 @@ import { Approach } from "@/components/about/Approach";
 import { Principles } from "@/components/about/Principles";
 import { Vision } from "@/components/about/Vision";
 import { AboutCTA } from "@/components/about/AboutCTA";
+import { FoundersSection } from "@/components/about/FounderProfiles";
 import { Breadcrumbs } from "@/components/seo/StructuredData";
-import { Container } from "@/components/ui/Container";
-import Link from "next/link";
 
 export const metadata: Metadata = constructMetadata({
   title: "About FyrnMedia — Digital Growth Studio",
@@ -25,6 +24,8 @@ export default function AboutPage() {
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "About" }]} />
       {/* 1. Hero */}
       <AboutHero />
+
+      <FoundersSection />
 
       {/* 2. Our Point of View */}
       <PointOfView />
@@ -43,13 +44,6 @@ export default function AboutPage() {
 
       {/* 7. Vision */}
       <Vision />
-
-      <section className="border-y border-border py-14 md:py-20">
-        <Container size="wide" className="grid gap-8 md:grid-cols-12 md:items-center">
-          <div className="md:col-span-7"><p className="text-xs font-mono uppercase tracking-widest text-foreground-subtle">People and opportunities</p><h2 className="mt-3 text-heading-xl font-semibold text-foreground">Interested in working with or alongside FyrnMedia?</h2><p className="mt-4 max-w-2xl text-sm leading-relaxed text-foreground-muted">Team information and open roles will be shared here when they are ready. For a collaboration or career enquiry, start a conversation with context.</p></div>
-          <div className="flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold text-accent md:col-span-5 md:justify-end"><Link href="/contact?topic=team" className="underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">Team and collaboration</Link><Link href="/contact?topic=careers" className="underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">Career enquiries</Link></div>
-        </Container>
-      </section>
 
       {/* 8. CTA */}
       <AboutCTA />
