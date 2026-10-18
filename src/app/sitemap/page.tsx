@@ -23,6 +23,6 @@ export default function HtmlSitemapPage() {
   return <>
     <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "HTML Sitemap" }]} />
     <section className="border-b border-border py-16 md:py-20"><Container size="wide"><p className="text-xs font-mono uppercase tracking-widest text-accent">FyrnMedia</p><h1 className="mt-5 text-display-xl font-bold tracking-tighter text-foreground">HTML sitemap.</h1><p className="mt-5 max-w-2xl text-base leading-relaxed text-foreground-muted">A structured index of public pages and services.</p></Container></section>
-    <section className="py-8 md:py-12"><Container size="wide"><SitemapList title="Explore" links={[{ name: "Home", href: "/" }, ...primaryLinks]} /><SitemapList title="Services" links={[{ name: "All services", href: "/services" }, ...serviceLinks]} /><SitemapList title="Industries" links={industryNavigation} /><SitemapList title="Company and information" links={utilityLinks} /></Container></section>
+    <section className="py-8 md:py-12"><Container size="wide"><SitemapList title="Explore" links={[{ name: "Home", href: "/" }, ...primaryLinks, { name: "Events", href: "/events" }]} /><SitemapList title="Services" links={[{ name: "All services", href: "/services" }, ...serviceLinks]} /><SitemapList title="Industries" links={industryNavigation} /><SitemapList title="Company and information" links={utilityLinks} /></Container></section>
   </>;
 }

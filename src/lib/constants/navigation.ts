@@ -140,6 +140,7 @@ export const footerNavigation = {
     { name: "Industries", href: "/industries" },
     { name: "Work", href: "/work" },
     { name: "Insights", href: "/insights" },
+    { name: "Events", href: "/events" },
     { name: "Glossary", href: "/glossary" },
     { name: "Tools", href: "/tools" },
     { name: "About", href: "/about" },

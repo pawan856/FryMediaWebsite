@@ -5,6 +5,7 @@ import { getPublishedArticles } from "@/lib/insights/articles";
 import { capabilityPages, glossaryTerms, industries, servicePages } from "@/lib/content/architecture";
 import { caseStudies } from "@/data/caseStudies";
 import { getPublishedCaseStudies } from "@/lib/work/validation";
+import { getPublishedEvents } from "@/data/events";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
@@ -21,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/glossary",
     ...glossaryTerms.map((term) => `/glossary/${term.slug}`),
     "/tools",
+    "/events",
     "/about",
     "/contact",
     "/audit",
@@ -28,11 +30,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${siteConfig.url}${route}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
-    priority: route === "" ? 1.0 : route === "/services/ai-search-visibility" ? 0.95 : route === "/services/seo" ? 0.9 : route === "/contact" || route === "/audit" ? 0.8 : route === "/work" || route === "/insights" || route === "/tools" ? 0.7 : 0.75,
+    priority: route === "" ? 1.0 : route === "/services/ai-search-visibility" ? 0.95 : route === "/services/seo" ? 0.9 : route === "/contact" || route === "/audit" ? 0.8 : route === "/work" || route === "/insights" || route === "/tools" || route === "/events" ? 0.7 : 0.75,
   }));
 
   return [
     ...routes,
+    ...getPublishedEvents().map((event) => ({
+      url: `${siteConfig.url}/events/${event.slug}`,
+      lastModified: new Date(event.date || Date.now()),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
     ...getPublishedCaseStudies(caseStudies).map((study) => ({
       url: `${siteConfig.url}/work/${study.slug}`,
       lastModified: new Date(study.publishedAt || Date.now()),

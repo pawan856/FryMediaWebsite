@@ -1,6 +1,7 @@
 import { siteConfig } from "@/lib/constants/site";
 import { CaseStudy } from "@/data/caseStudies";
 import { Article } from "@/content/insights/articles";
+import { IndustryEvent } from "@/data/events";
 
 function JsonLd({ data }: { data: Record<string, unknown> }) {
   return (
@@ -163,6 +164,37 @@ export function EditorialServiceStructuredData({ name, description, path }: { na
         provider: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
         areaServed: "Worldwide",
         url: `${siteConfig.url}${path}`,
+      }}
+    />
+  );
+}
+
+export function EventStructuredData({ event }: { event: IndustryEvent }) {
+  return (
+    <JsonLd
+      data={{
+        "@context": "https://schema.org",
+        "@type": "Event",
+        name: event.name,
+        description: event.description,
+        startDate: event.date || `${event.year}-01-01`,
+        location: {
+          "@type": "Place",
+          name: event.location,
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: event.location,
+          },
+        },
+        image: event.photos.map((p) => `${siteConfig.url}${p.src}`),
+        eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+        eventStatus: "https://schema.org/EventScheduled",
+        organizer: event.organizer
+          ? {
+              "@type": "Organization",
+              name: event.organizer,
+            }
+          : undefined,
       }}
     />
   );
