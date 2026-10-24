@@ -1,14 +1,14 @@
 import { footerNavigation, siteNavigation } from "@/lib/constants/navigation";
 
 export const siteConfig = {
-  name: "FyrnMedia",
-  legalName: "FyrnMedia Digital Growth",
+  name: "Fyrn Media",
+  legalName: "Fyrn Media",
   description:
-    "FyrnMedia makes AI useful in everyday life through AI search visibility, organic growth, content, technology, and measurement.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://fyrnmedia.com",
+    "Fyrn Media helps ambitious brands get found across Google and AI answer engines. AI search visibility, SEO, content and web builds. Get a free audit.",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.fyrnmedia.com",
   ogImage: undefined,
   twitterHandle: undefined,
-  address: "International Studios: London • New York • Singapore",
+  address: "London · New York · Singapore",
   contactEmail: "inquiries@fyrnmedia.com",
   navLinks: siteNavigation,
   footerLinks: {

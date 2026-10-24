@@ -14,10 +14,13 @@ import { AiSearchFeature } from "@/components/home/AiSearchFeature";
 import { PlatformIndex } from "@/components/home/PlatformIndex";
 
 export const metadata: Metadata = constructMetadata({
-  title: "Fyrn Media — AI for Everyday Life",
+  title: "Fyrn Media | AI Search Visibility, SEO & Web Growth Agency",
   description:
-    "Fyrn Media exists to make AI useful in everyday life. We help ambitious brands grow through thoughtful digital strategy, search visibility, and high-performance web experiences.",
+    "Fyrn Media helps ambitious brands get found across Google and AI answer engines. AI search visibility, SEO, content and web builds. Get a free audit.",
   path: "/",
+  ogTitle: "Fyrn Media | AI for Everyday Life: AI Search Visibility, SEO & Web Growth",
+  ogDescription:
+    "Be the brand people and AI can find, understand and trust. Get a free AI Visibility Audit from Fyrn Media.",
 });
 
 export default function HomePage() {

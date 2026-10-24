@@ -15,23 +15,119 @@ function JsonLd({ data }: { data: Record<string, unknown> }) {
 export function SiteStructuredData() {
   return (
     <>
+      {/* Block 1: Organization + WebSite + WebPage */}
       <JsonLd
         data={{
           "@context": "https://schema.org",
-          "@type": "Organization",
-          name: siteConfig.name,
-          url: siteConfig.url,
-          description: siteConfig.description,
-          email: siteConfig.contactEmail,
+          "@graph": [
+            {
+              "@type": "Organization",
+              "@id": `${siteConfig.url}/#org`,
+              name: "Fyrn Media",
+              alternateName: "FyrnMedia",
+              url: siteConfig.url,
+              email: siteConfig.contactEmail,
+              slogan: "AI for Everyday Life",
+              description:
+                "Fyrn Media helps ambitious brands get found across search engines and AI answer systems through AI search visibility, SEO, content, web development and analytics.",
+              knowsAbout: [
+                "AI search visibility",
+                "Answer engine optimization",
+                "Generative engine optimization",
+                "Technical SEO",
+                "Entity SEO",
+              ],
+            },
+            {
+              "@type": "WebSite",
+              "@id": `${siteConfig.url}/#website`,
+              url: siteConfig.url,
+              name: "Fyrn Media",
+              publisher: { "@id": `${siteConfig.url}/#org` },
+            },
+            {
+              "@type": "WebPage",
+              "@id": `${siteConfig.url}/#webpage`,
+              url: siteConfig.url,
+              name: "Fyrn Media | AI Search Visibility, SEO & Web Growth Agency",
+              isPartOf: { "@id": `${siteConfig.url}/#website` },
+              about: { "@id": `${siteConfig.url}/#org` },
+              dateModified: "2026-10-18",
+            },
+          ],
         }}
       />
+      {/* Block 2: FAQPage */}
       <JsonLd
         data={{
           "@context": "https://schema.org",
-          "@type": "WebSite",
-          name: siteConfig.name,
-          url: siteConfig.url,
-          description: siteConfig.description,
+          "@type": "FAQPage",
+          mainEntity: [
+            {
+              "@type": "Question",
+              name: "What does Fyrn Media do?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Fyrn Media is a digital growth partner that helps brands get found and chosen in search and AI answers. Our seven services cover AI search visibility, SEO, content and social, performance marketing, AI automation, web development, and analytics and strategy, delivered as one connected plan.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "What is AI search visibility?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "AI search visibility is how clearly search engines and AI assistants can find, understand and cite your brand when people ask questions. It combines answer engine optimization (AEO), generative engine optimization (GEO), entity SEO and credible third-party sources, on top of sound technical SEO.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "What\'s the difference between SEO and GEO?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "SEO helps your pages rank in traditional search results. GEO helps your brand be understood and referenced in AI-generated answers. They share the same foundations (technical health, useful content, trustworthy sources), so we treat them as one program rather than two.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "Can you guarantee rankings or AI citations?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "No, and be cautious of anyone who does. Search engines and AI systems make their own decisions. We improve the signals you can control, such as technical health, content quality, entity clarity and credibility, and we report on observable results against goals agreed up front.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "Who is Fyrn Media best suited for?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Ambitious businesses that already have a website and want more qualified enquiries, better visibility or clarity on how AI is changing discovery. That is typically B2B and SaaS companies, e-commerce brands and service businesses.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "How does the free AI Visibility Audit work?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Share your website and what you want to improve. We review how search engines and AI assistants currently surface your brand and send you a plain-English summary of strengths, gaps and next steps. There is no obligation to continue.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "How long does it take to see results?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Some technical fixes show up within weeks. Content, authority and AI-answer visibility usually build over several months. We set realistic milestones during discovery and report progress against them, so you\'re never guessing.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "How do we get started?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Request the free audit or use Let\'s Talk. We\'ll learn about your goals, share what we see and recommend a sensible first step, which may be a single service rather than a full program. We have teams in London, New York and Singapore.",
+              },
+            },
+          ],
         }}
       />
     </>
