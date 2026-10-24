@@ -4,32 +4,25 @@ import React, { useRef } from "react";
 import { useInView } from "@/lib/hooks/useInView";
 import { Container } from "@/components/ui/Container";
 import { cn } from "@/lib/utils/cn";
-import { EmptyWorkState } from "@/components/work/EmptyWorkState";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 
-const metricCategories = [
+const metrics = [
   {
-    index: "01",
-    category: "Organic Visibility",
-    description: "SERP position tracking, impression growth, and search market share capture.",
-    label: "Case Study Incoming",
+    category: "Organic visibility",
+    description: "Impressions, share of search and how often your brand appears in AI answers.",
   },
   {
-    index: "02",
-    category: "Search Performance",
-    description: "Click-through rates, rank velocity, featured snippet acquisition.",
-    label: "Case Study Incoming",
+    category: "Search performance",
+    description: "Click-through rate, ranking movement and featured-snippet or AI Overview appearances.",
   },
   {
-    index: "03",
-    category: "Qualified Traffic",
-    description: "Session quality, audience intent match, time-on-site and scroll depth.",
-    label: "Case Study Incoming",
+    category: "Qualified traffic",
+    description: "Engaged sessions, intent match and how far visitors read.",
   },
   {
-    index: "04",
-    category: "Conversion Growth",
-    description: "Lead volume, revenue attribution, and organic channel contribution.",
-    label: "Case Study Incoming",
+    category: "Conversion growth",
+    description: "Leads, pipeline and revenue attributed to organic and AI-driven discovery.",
   },
 ];
 
@@ -40,84 +33,73 @@ export function ProofSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full border-b border-border py-24 md:py-36 overflow-hidden"
+      className="relative w-full border-b border-border py-20 md:py-32 overflow-hidden"
     >
       <Container size="wide">
-        {/* Header */}
-        <div
-          className={cn(
-            "grid grid-cols-1 lg:grid-cols-12 gap-8 mb-20 transition-all duration-700",
-            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          )}
-        >
-          <div className="lg:col-span-6">
-            <div className="flex items-center gap-3 mb-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+          <div className="max-w-2xl">
+            <div className="flex items-center gap-3 mb-4">
               <span className="block w-6 h-px bg-accent flex-shrink-0" />
               <span className="text-xs font-mono tracking-widest uppercase text-foreground-muted">
-                Results & Proof
+                Results and Measurement
               </span>
             </div>
             <h2 className="text-display-lg font-bold text-foreground tracking-tighter">
-              Growth should be
-              <br />
-              <span className="text-foreground-muted font-normal">measurable.</span>
+              Growth you can measure, and check.
             </h2>
-          </div>
-          <div className="lg:col-span-5 lg:col-start-8 self-end">
-            <p className="text-base md:text-lg text-foreground-muted leading-relaxed">
-              We measure what matters — not just rankings, but real business
-              outcomes across organic visibility, qualified traffic, and revenue.
+            <p className="mt-4 text-base md:text-lg text-foreground-muted leading-relaxed">
+              We agree success metrics before work begins and report against them throughout. Here is what we track.
             </p>
+          </div>
+          <div>
+            <Link
+              href="/work"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:text-accent-hover transition-colors"
+            >
+              <span>See our work</span>
+              <ArrowUpRight className="h-4 w-4" />
+            </Link>
           </div>
         </div>
 
-        {/* Metric Framework */}
-        <div
-          className={cn(
-            "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 border border-border mb-16 transition-all duration-700",
-            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          )}
-          style={{ transitionDelay: "100ms" }}
-        >
-          {metricCategories.map((m, i) => (
+        {/* Metric tiles replacing Case Study Incoming */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {metrics.map((m, i) => (
             <div
-              key={m.index}
+              key={m.category}
               className={cn(
-                "group relative p-6 border-border transition-all duration-300 hover:bg-background-elevated/40",
-                i < 3 ? "border-r border-border" : "",
-                "border-b sm:border-b-0"
+                "p-7 rounded-sm border border-border bg-background transition-all duration-300 hover:border-accent/60 flex flex-col justify-between",
+                inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
               )}
+              style={{ transitionDelay: `${i * 90}ms` }}
             >
-              <div className="text-[10px] font-mono text-foreground-subtle tracking-widest mb-3">
-                {m.index}
-              </div>
-              <h3 className="text-sm font-semibold text-foreground mb-2 group-hover:text-accent transition-colors duration-300">
-                {m.category}
-              </h3>
-              <p className="text-xs text-foreground-subtle leading-relaxed">{m.description}</p>
-              <div className="mt-4 pt-4 border-t border-border/50">
-                <span className="text-[10px] font-mono text-foreground-dim tracking-widest uppercase">
-                  {m.label}
+              <div>
+                <span className="text-xs font-mono text-accent font-semibold tracking-wider">
+                  0{i + 1}
                 </span>
+                <h3 className="mt-3 text-lg font-semibold text-foreground">
+                  {m.category}
+                </h3>
+                <p className="mt-2 text-sm text-foreground-muted leading-relaxed">
+                  {m.description}
+                </p>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Selected Work */}
-        <div
-          className={cn(
-            "transition-all duration-700",
-            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          )}
-          style={{ transitionDelay: "200ms" }}
-        >
-          <div className="flex items-center justify-between mb-8">
-            <h3 className="text-xs font-mono uppercase tracking-widest text-foreground-subtle">
-              Selected Work
-            </h3>
-          </div>
-          <EmptyWorkState showArchiveLink />
+        {/* Note regarding case studies */}
+        <div className="mt-12 p-6 border border-border bg-background-elevated/30 rounded-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <p className="text-sm text-foreground-muted">
+            Case studies go live only once the client has approved the numbers. Until then, ask us for a walkthrough of our method and sample reporting.
+          </p>
+          <Link
+            href="/work"
+            className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-widest text-accent font-semibold shrink-0"
+          >
+            <span>Explore Work</span>
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </Link>
         </div>
       </Container>
     </section>

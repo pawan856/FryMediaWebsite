@@ -9,8 +9,6 @@ import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { ArrowUpRight } from "lucide-react";
 
 export function Footer() {
-  const currentYear = new Date().getFullYear();
-
   return (
     <footer className="w-full bg-background border-t border-border pt-20 pb-12 overflow-hidden">
       <Container size="wide">
@@ -28,10 +26,9 @@ export function Footer() {
 
             <Text variant="body" className="max-w-md text-foreground-muted leading-relaxed">
               We make AI useful in everyday life through thoughtful strategy,
-              digital experiences, and technology that helps people and
+              digital experiences and technology that helps people and
               ambitious brands move forward.
             </Text>
-
           </div>
 
           {/* Navigation Columns */}
@@ -82,23 +79,32 @@ export function Footer() {
                 {footerNavigation.contact.map((link) => (
                   <li key={link.name}>
                     {link.href === "/audit" ? (
-                      <TrackedLink href={link.href} event="audit_cta_click" className="group inline-flex items-center gap-1 text-foreground-muted transition-colors hover:text-foreground">
-                        <span>{link.name}</span><ArrowUpRight className="h-3 w-3 -translate-x-1 text-accent opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
+                      <TrackedLink
+                        href={link.href}
+                        event="audit_cta_click"
+                        className="group inline-flex items-center gap-1 text-foreground-muted transition-colors hover:text-foreground"
+                      >
+                        <span>{link.name}</span>
+                        <ArrowUpRight className="h-3 w-3 -translate-x-1 text-accent opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
                       </TrackedLink>
                     ) : (
-                      <Link href={link.href} className="group inline-flex items-center gap-1 text-foreground-muted transition-colors hover:text-foreground">
-                        <span>{link.name}</span><ArrowUpRight className="h-3 w-3 -translate-x-1 text-accent opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
+                      <Link
+                        href={link.href}
+                        className="group inline-flex items-center gap-1 text-foreground-muted transition-colors hover:text-foreground"
+                      >
+                        <span>{link.name}</span>
+                        <ArrowUpRight className="h-3 w-3 -translate-x-1 text-accent opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
                       </Link>
                     )}
                   </li>
                 ))}
                 <li className="pt-2">
-                <a
-                  href={`mailto:${siteConfig.contactEmail}`}
-                  className="block text-sm font-mono text-foreground hover:text-accent transition-colors break-all"
-                >
-                  {siteConfig.contactEmail}
-                </a>
+                  <a
+                    href={`mailto:${siteConfig.contactEmail}`}
+                    className="block text-sm font-mono text-foreground hover:text-accent transition-colors break-all"
+                  >
+                    {siteConfig.contactEmail}
+                  </a>
                 </li>
               </ul>
             </div>
@@ -108,8 +114,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs font-mono text-foreground-subtle">
           <div>
-            © {currentYear} {siteConfig.name}. All rights reserved. Architectural
-            Performance & Strategy.
+            © 2026 Fyrn Media. All rights reserved.
           </div>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             {footerNavigation.governance.map((item) => (

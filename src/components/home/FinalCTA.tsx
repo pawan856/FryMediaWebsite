@@ -6,7 +6,7 @@ import { useInView } from "@/lib/hooks/useInView";
 import { Container } from "@/components/ui/Container";
 import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { cn } from "@/lib/utils/cn";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 export function FinalCTA() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -28,20 +28,8 @@ export function FinalCTA() {
         }}
       />
 
-      {/* Subtle grid */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-30"
-        aria-hidden="true"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, rgba(24,60,46,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(24,60,46,0.04) 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
-        }}
-      />
-
       <Container size="tight" className="relative z-10">
         <div className="text-center space-y-10">
-          {/* Section label */}
           <div
             className={cn(
               "flex items-center justify-center gap-3 transition-all duration-700",
@@ -55,7 +43,6 @@ export function FinalCTA() {
             <span className="h-px w-8 bg-accent" />
           </div>
 
-          {/* Main headline */}
           <div
             className={cn(
               "transition-all duration-700 space-y-4",
@@ -64,15 +51,13 @@ export function FinalCTA() {
             style={{ transitionDelay: "100ms" }}
           >
             <h2 className="text-display-xl font-bold text-foreground tracking-tighter">
-              Ready to grow?
+              Ready to be easier to find?
             </h2>
             <p className="text-lg md:text-xl text-foreground-muted leading-relaxed max-w-xl mx-auto">
-              Tell us where you are today. We&apos;ll help you figure out where
-              to go next.
+              Tell us where you are today. We’ll help you work out where to go next.
             </p>
           </div>
 
-          {/* CTA buttons */}
           <div
             className={cn(
               "flex flex-wrap items-center justify-center gap-5 transition-all duration-700",
@@ -80,7 +65,6 @@ export function FinalCTA() {
             )}
             style={{ transitionDelay: "200ms" }}
           >
-            {/* Primary */}
             <TrackedLink
               href="/contact"
               event="contact_cta_click"
@@ -94,34 +78,28 @@ export function FinalCTA() {
               <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-[0.08] transition-opacity duration-300" />
             </TrackedLink>
 
-            {/* Secondary */}
             <Link
-              href="/services"
+              href="/audit"
               className="group inline-flex items-center gap-2.5 border border-border hover:border-border-hover text-foreground-muted hover:text-foreground text-base font-medium px-8 py-4 rounded-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
-              <span>Explore Services</span>
-              <ArrowRight
-                className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
+              <span>Get a Free AI Visibility Audit</span>
+              <ArrowUpRight
+                className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 aria-hidden="true"
               />
             </Link>
           </div>
 
-          {/* Footer context line */}
           <div
             className={cn(
-              "pt-4 flex items-center justify-center gap-6 transition-all duration-700",
+              "pt-6 flex flex-wrap items-center justify-center gap-6 text-xs font-mono text-foreground-dim tracking-wide transition-all duration-700",
               inView ? "opacity-100" : "opacity-0"
             )}
             style={{ transitionDelay: "350ms" }}
           >
-            <span className="text-xs font-mono text-foreground-dim tracking-wide">
-              inquiries@fyrnmedia.com
-            </span>
-            <span className="h-px w-4 bg-border" aria-hidden="true" />
-            <span className="text-xs font-mono text-foreground-dim tracking-wide">
-              London · New York · Singapore
-            </span>
+            <span>Prefer email? inquiries@fyrnmedia.com</span>
+            <span className="h-px w-4 bg-border hidden sm:inline" aria-hidden="true" />
+            <span>London · New York · Singapore</span>
           </div>
         </div>
       </Container>

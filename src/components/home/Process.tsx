@@ -4,37 +4,39 @@ import React, { useRef } from "react";
 import { useInView } from "@/lib/hooks/useInView";
 import { Container } from "@/components/ui/Container";
 import { cn } from "@/lib/utils/cn";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 
 const steps = [
   {
-    number: "01",
+    number: "1",
     title: "Discover",
     description:
-      "We audit your current digital position, map competitive gaps, and deeply understand your audience's search behaviour and intent.",
+      "We audit where you stand today, map competitors and search demand, and learn how your customers actually search.",
   },
   {
-    number: "02",
+    number: "2",
     title: "Strategize",
     description:
-      "A focused growth plan is built around your specific goals — the channels, content model, and technical priorities that will actually move the needle.",
+      "You get a focused plan: the channels, content model and technical fixes that match your goals.",
   },
   {
-    number: "03",
+    number: "3",
     title: "Execute",
     description:
-      "Our senior team designs, optimizes, and implements — SEO architecture, content, web performance — with precision and measurable milestones.",
+      "Our senior team ships the work (site architecture, content, performance) with clear milestones.",
   },
   {
-    number: "04",
+    number: "4",
     title: "Measure",
     description:
-      "We track the metrics that matter: organic visibility, qualified traffic, conversion rate, and revenue attribution — not just rankings.",
+      "We track visibility, qualified traffic, conversions and revenue, not just rankings.",
   },
   {
-    number: "05",
+    number: "5",
     title: "Scale",
     description:
-      "What works gets doubled. Insights compound. We help you reinvest in the channels and content that demonstrate the highest return.",
+      "We double down on what works and reinvest in the channels earning the strongest return.",
   },
 ];
 
@@ -45,97 +47,64 @@ export function Process() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full border-b border-border py-24 md:py-36 bg-background-elevated/20 overflow-hidden"
+      className="relative w-full border-b border-border py-20 md:py-32 bg-background-elevated/20 overflow-hidden"
     >
       <Container size="wide">
-        {/* Header */}
-        <div
-          className={cn(
-            "grid grid-cols-1 lg:grid-cols-12 gap-8 mb-20 transition-all duration-700",
-            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          )}
-        >
-          <div className="lg:col-span-5">
-            <div className="flex items-center gap-3 mb-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+          <div className="max-w-2xl">
+            <div className="flex items-center gap-3 mb-4">
               <span className="block w-6 h-px bg-accent flex-shrink-0" />
               <span className="text-xs font-mono tracking-widest uppercase text-foreground-muted">
                 How We Work
               </span>
             </div>
             <h2 className="text-display-lg font-bold text-foreground tracking-tighter">
-              From idea
-              <br />
-              to impact.
+              From first conversation to measurable growth.
             </h2>
-          </div>
-          <div className="lg:col-span-5 lg:col-start-8 self-end">
-            <p className="text-base md:text-lg text-foreground-muted leading-relaxed">
-              A structured process that removes guesswork and connects every
-              action to business outcomes.
+            <p className="mt-4 text-base md:text-lg text-foreground-muted leading-relaxed">
+              A clear process that removes guesswork and ties every action to a business outcome.
             </p>
           </div>
-        </div>
-
-        {/* Process steps — vertical with connecting line */}
-        <div className="relative">
-          {/* Vertical connector line (desktop) */}
-          <div
-            className="absolute left-[calc(4rem-0.5px)] top-4 bottom-4 w-px hidden lg:block transition-all duration-1000"
-            style={{
-              background: inView
-                ? "linear-gradient(to bottom, rgba(112,157,119,0.65), rgba(24,60,46,0.08))"
-                : "transparent",
-            }}
-            aria-hidden="true"
-          />
-
-          <div className="space-y-0">
-            {steps.map((step, i) => (
-              <div
-                key={step.number}
-                className={cn(
-                  "relative grid grid-cols-1 lg:grid-cols-12 gap-6 py-8 md:py-10 border-b border-border group transition-all duration-700 hover:bg-background-elevated/20",
-                  inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-                )}
-                style={{ transitionDelay: `${i * 100}ms` }}
-              >
-                {/* Number with visual dot on the connector line */}
-                <div className="lg:col-span-2 flex items-center gap-4 lg:gap-0 lg:block">
-                  <div className="relative flex items-center justify-center w-16 h-16 border border-border bg-background rounded-sm group-hover:border-accent/40 transition-colors duration-300 flex-shrink-0">
-                    {/* Active indicator */}
-                    <div
-                      className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-sm"
-                      aria-hidden="true"
-                    />
-                    <span className="text-sm font-mono text-foreground-muted group-hover:text-accent transition-colors duration-300 relative">
-                      {step.number}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Title */}
-                <div className="lg:col-span-3 lg:flex lg:items-center">
-                  <h3 className="text-heading-xl font-semibold text-foreground tracking-tight group-hover:text-accent transition-colors duration-300">
-                    {step.title}
-                  </h3>
-                </div>
-
-                {/* Description */}
-                <div className="lg:col-span-6 lg:flex lg:items-center">
-                  <p className="text-base text-foreground-muted leading-relaxed max-w-lg">
-                    {step.description}
-                  </p>
-                </div>
-
-                {/* Step accent line — top border glow on hover */}
-                <div
-                  className="absolute top-0 left-0 h-px w-0 bg-gradient-to-r from-accent to-transparent transition-all duration-500 group-hover:w-full"
-                  aria-hidden="true"
-                />
-              </div>
-            ))}
+          <div>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:text-accent-hover transition-colors"
+            >
+              <span>See how an engagement starts</span>
+              <ArrowUpRight className="h-4 w-4" />
+            </Link>
           </div>
         </div>
+
+        {/* Ordered list semantics as requested */}
+        <ol className="divide-y divide-border border-y border-border list-none p-0 m-0">
+          {steps.map((step, i) => (
+            <li
+              key={step.number}
+              className={cn(
+                "grid grid-cols-1 md:grid-cols-12 gap-6 py-8 md:py-10 transition-all duration-700 items-start",
+                inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+              )}
+              style={{ transitionDelay: `${i * 100}ms` }}
+            >
+              <div className="md:col-span-1">
+                <span className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-border font-mono text-sm font-semibold text-accent bg-background">
+                  {step.number}
+                </span>
+              </div>
+              <div className="md:col-span-4">
+                <h3 className="text-xl font-bold text-foreground tracking-tight">
+                  {step.title}
+                </h3>
+              </div>
+              <div className="md:col-span-7">
+                <p className="text-base text-foreground-muted leading-relaxed max-w-2xl">
+                  {step.description}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ol>
       </Container>
     </section>
   );

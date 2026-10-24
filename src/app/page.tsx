@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import { constructMetadata } from "@/lib/utils/seo";
 import { Hero } from "@/components/home/Hero";
-import { PositioningStrip } from "@/components/home/PositioningStrip";
+import { QuickAnswer } from "@/components/home/QuickAnswer";
+import { ProblemSolution } from "@/components/trust/ProblemSolution";
+import { AiSearchFeature } from "@/components/home/AiSearchFeature";
 import { WhatWeDo } from "@/components/home/WhatWeDo";
-import { SeoSpotlight } from "@/components/home/SeoSpotlight";
 import { WhyFyrnMedia } from "@/components/home/WhyFyrnMedia";
 import { Process } from "@/components/home/Process";
 import { ProofSection } from "@/components/home/ProofSection";
+import { AuditBand } from "@/components/home/AuditBand";
+import { HomeInsights } from "@/components/home/HomeInsights";
+import { FAQ } from "@/components/home/FAQ";
 import { FinalCTA } from "@/components/home/FinalCTA";
-import { TrustStrip } from "@/components/trust/TrustStrip";
-import { ProblemSolution } from "@/components/trust/ProblemSolution";
-import { AiSearchFeature } from "@/components/home/AiSearchFeature";
-import { PlatformIndex } from "@/components/home/PlatformIndex";
 
 export const metadata: Metadata = constructMetadata({
   title: "Fyrn Media | AI Search Visibility, SEO & Web Growth Agency",
@@ -26,32 +26,40 @@ export const metadata: Metadata = constructMetadata({
 export default function HomePage() {
   return (
     <>
-      {/* 1. Hero */}
+      {/* SECTION 2 · HERO */}
       <Hero />
-      <TrustStrip />
 
-      {/* 2. Positioning strip */}
-      <PositioningStrip />
+      {/* SECTION 3 · QUICK ANSWER */}
+      <QuickAnswer />
 
-      {/* 3. What FyrnMedia does */}
-      <WhatWeDo />
-      <AiSearchFeature />
+      {/* SECTION 4 · PROBLEMS WE SOLVE */}
       <ProblemSolution />
 
-      {/* 4. SEO Spotlight */}
-      <SeoSpotlight />
+      {/* SECTION 5 · FLAGSHIP SERVICE */}
+      <AiSearchFeature />
 
-      {/* 5. Why FyrnMedia */}
+      {/* SECTION 6 · SERVICES */}
+      <WhatWeDo />
+
+      {/* SECTION 7 · WHY FYRN MEDIA */}
       <WhyFyrnMedia />
 
-      {/* 6. Process */}
+      {/* SECTION 8 · HOW WE WORK */}
       <Process />
 
-      {/* 7. Proof / Results */}
+      {/* SECTION 9 · RESULTS AND MEASUREMENT */}
       <ProofSection />
-      <PlatformIndex />
 
-      {/* 8. Closing CTA */}
+      {/* SECTION 10 · FREE AI VISIBILITY AUDIT */}
+      <AuditBand />
+
+      {/* SECTION 11 · INSIGHTS */}
+      <HomeInsights />
+
+      {/* SECTION 12 · FAQ */}
+      <FAQ />
+
+      {/* SECTION 13 · FINAL CALL TO ACTION */}
       <FinalCTA />
     </>
   );
