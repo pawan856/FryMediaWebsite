@@ -9,6 +9,8 @@ interface SEOProps {
   path?: string;
   image?: string;
   noIndex?: boolean;
+  ogTitle?: string;
+  ogDescription?: string;
 }
 
 export function constructMetadata({
@@ -17,6 +19,8 @@ export function constructMetadata({
   path = "",
   image = siteConfig.ogImage,
   noIndex = false,
+  ogTitle,
+  ogDescription,
 }: SEOProps = {}): Metadata {
   const fullTitle = title
     ? title
@@ -33,8 +37,8 @@ export function constructMetadata({
       languages: getLanguageAlternates(path),
     },
     openGraph: {
-      title: fullTitle,
-      description,
+      title: ogTitle || fullTitle,
+      description: ogDescription || description,
       url: canonicalUrl,
       siteName: siteConfig.name,
       ...(image
@@ -54,8 +58,8 @@ export function constructMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: fullTitle,
-      description,
+      title: ogTitle || fullTitle,
+      description: ogDescription || description,
       ...(image ? { images: [image] } : {}),
       creator: siteConfig.twitterHandle,
     },

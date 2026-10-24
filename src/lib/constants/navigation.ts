@@ -144,6 +144,7 @@ export const footerNavigation = {
     { name: "Glossary", href: "/glossary" },
     { name: "Tools", href: "/tools" },
     { name: "About", href: "/about" },
+    { name: "Team", href: "/about/team" },
   ],
   contact: [
     { name: "Let’s Talk", href: "/contact" },

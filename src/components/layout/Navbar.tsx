@@ -14,6 +14,7 @@ import { MobileMenu } from "./MobileMenu";
 import { getActiveNavigationHref } from "@/lib/utils/navigation";
 import { FyrnLogo } from "@/components/brand/FyrnLogo";
 import { ChevronDown, ArrowUpRight } from "lucide-react";
+import { TrackedLink } from "@/components/analytics/TrackedLink";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -322,8 +323,15 @@ export function Navbar() {
             </div>
           </div>
 
-          {/* Right Action: Let's Talk CTA */}
-          <div className="hidden lg:flex items-center gap-4">
+          {/* Right Action: Free AI Audit + Let's Talk CTA */}
+          <div className="hidden lg:flex items-center gap-3">
+            <TrackedLink
+              href="/audit"
+              event="audit_cta_click"
+              className="border border-border hover:border-accent/60 text-foreground-muted hover:text-foreground text-xs font-mono tracking-wide uppercase px-3 py-2 rounded-sm transition-all duration-200 whitespace-nowrap"
+            >
+              Free AI Audit
+            </TrackedLink>
             <div onClick={() => track(analyticsEvents.contactCtaClick, { page: pathname })}>
               <Button href="/contact" variant="primary" size="sm" className="text-xs tracking-wide uppercase font-mono px-4 py-2">
                 <span>Let&apos;s Talk</span>
