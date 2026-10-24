@@ -309,7 +309,7 @@ export function Hero() {
               <div className="inline-flex items-center gap-2">
                 <span className="block w-6 h-px bg-accent" />
                 <span className="text-xs font-mono tracking-widest uppercase text-foreground-muted">
-                  Fyrn Media · AI for Everyday Life
+                  FYRN MEDIA · AI SEARCH VISIBILITY & SEO · AI FOR EVERYDAY LIFE
                 </span>
               </div>
             </div>
@@ -326,11 +326,11 @@ export function Hero() {
                 id="hero-heading"
                 className="text-display-2xl font-bold text-foreground leading-none tracking-tighter"
               >
-                Making everyday
+                Be the brand people,
                 <br />
-                life better
+                and AI, can find,
                 <br />
-                <span className="hero-highlight text-accent">with AI.</span>
+                <span className="hero-highlight text-accent">understand and trust.</span>
               </h1>
             </div>
 
@@ -343,47 +343,49 @@ export function Hero() {
               style={{ transitionDelay: "240ms" }}
             >
               <p className="text-base md:text-lg text-foreground-muted leading-relaxed max-w-md">
-                We make AI useful in the real world. Through thoughtful digital
-                strategy, search, and web experiences, we help ambitious brands
-                connect technology with the people and everyday moments that
-                matter.
+                Fyrn Media helps ambitious brands get discovered across Google, AI Overviews and AI assistants. We combine clear strategy, technical SEO, useful content and fast websites, so the right customers find you at the moment they’re searching.
               </p>
             </div>
 
             {/* CTA Buttons */}
             <div
               className={cn(
-                "flex flex-wrap items-center gap-4 transition-all duration-700",
+                "flex flex-col gap-3 transition-all duration-700",
                 mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
               )}
               style={{ transitionDelay: "360ms" }}
             >
-              {/* Primary CTA */}
-              <TrackedLink
-                href="/contact"
-                event="hero_cta_click"
-                className="group relative inline-flex items-center gap-2.5 bg-accent hover:bg-accent-hover hover:-translate-y-px hover:shadow-md hover:shadow-accent/20 text-white font-semibold text-sm px-6 py-3.5 rounded-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background overflow-hidden"
-              >
-                <span className="relative z-10">Let&apos;s Talk</span>
-                <ArrowUpRight
-                  className="w-4 h-4 relative z-10 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  aria-hidden="true"
-                />
-                {/* Subtle shine on hover */}
-                <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-[0.08] transition-opacity duration-300" />
-              </TrackedLink>
+              <div className="flex flex-wrap items-center gap-4">
+                {/* Primary CTA */}
+                <TrackedLink
+                  href="/audit"
+                  event="hero_cta_click"
+                  className="group relative inline-flex items-center gap-2.5 bg-accent hover:bg-accent-hover hover:-translate-y-px hover:shadow-md hover:shadow-accent/20 text-white font-semibold text-sm px-6 py-3.5 rounded-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background overflow-hidden"
+                >
+                  <span className="relative z-10">Get a Free AI Visibility Audit</span>
+                  <ArrowUpRight
+                    className="w-4 h-4 relative z-10 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    aria-hidden="true"
+                  />
+                  {/* Subtle shine on hover */}
+                  <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-[0.08] transition-opacity duration-300" />
+                </TrackedLink>
 
-              {/* Secondary CTA */}
-              <Link
-                href="/services"
-                className="group inline-flex items-center gap-2.5 border border-border hover:border-border-hover text-foreground-muted hover:text-foreground text-sm font-medium px-6 py-3.5 rounded-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-              >
-                <span>Explore Services</span>
-                <ArrowRight
-                  className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
-                  aria-hidden="true"
-                />
-              </Link>
+                {/* Secondary CTA */}
+                <Link
+                  href="/services"
+                  className="group inline-flex items-center gap-2.5 border border-border hover:border-border-hover text-foreground-muted hover:text-foreground text-sm font-medium px-6 py-3.5 rounded-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                >
+                  <span>Explore Services</span>
+                  <ArrowRight
+                    className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                    aria-hidden="true"
+                  />
+                </Link>
+              </div>
+              <p className="text-xs text-foreground-subtle">
+                Free and plain-English. No obligation, and no promised rankings, just clear next steps.
+              </p>
             </div>
 
             {/* Micro stat bar */}
@@ -394,17 +396,17 @@ export function Hero() {
               )}
               style={{ transitionDelay: "480ms" }}
             >
-              <div className="grid grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {[
-                  { value: "SEO", label: "Engineering" },
-                  { value: "Web", label: "Performance" },
-                  { value: "Growth", label: "Strategy" },
+                  { value: "London · NY · SG", label: "International presence" },
+                  { value: "Strategy first", label: "Measured against goals" },
+                  { value: "AI-assisted", label: "Human-led execution" },
                 ].map((stat) => (
                   <div key={stat.value}>
-                    <div className="text-base font-semibold font-mono text-foreground tracking-tight">
+                    <div className="text-sm font-semibold font-mono text-foreground tracking-tight">
                       {stat.value}
                     </div>
-                    <div className="text-xs text-foreground-subtle font-mono uppercase tracking-wider mt-0.5">
+                    <div className="text-[11px] text-foreground-subtle font-mono uppercase tracking-wider mt-0.5">
                       {stat.label}
                     </div>
                   </div>
@@ -458,7 +460,7 @@ export function Hero() {
         >
           <div className="w-px h-8 bg-gradient-to-b from-foreground-subtle to-transparent" />
           <span className="text-[9px] font-mono tracking-widest uppercase text-foreground-subtle">
-            Scroll
+            Scroll to see how it works
           </span>
         </div>
       </Container>
